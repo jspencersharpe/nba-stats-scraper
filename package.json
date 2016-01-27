@@ -1,12 +1,25 @@
 {
-  "name"         : "node-web-scrape",
-  "version"      : "0.0.1",
-  "description"  : "Scrape le web.",
-  "main"         : "server.js",
-  "author"       : "Scotch",
-  "dependencies" : {
-    "express"    : "latest",
-    "request"    : "latest",
-    "cheerio"    : "latest"
-  }
+  "name": "node-web-scraper",
+  "version": "0.0.1",
+  "description": "Scrape le web.",
+  "main": "server.js",
+  "author": "Scotch",
+  "dependencies": {
+    "express": "latest",
+    "request": "latest",
+    "cheerio": "latest"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jspencersharpe/nba-stats-scraper.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jspencersharpe/nba-stats-scraper/issues"
+  },
+  "homepage": "https://github.com/jspencersharpe/nba-stats-scraper#readme"
 }
