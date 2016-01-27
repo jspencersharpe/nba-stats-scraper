@@ -4,42 +4,52 @@ var request = require('request');
 var cheerio = require('cheerio');
 var app     = express();
 
+var team = process.argv[2];
+// var team = team.toString();
+
 app.get('/scrape', function(req, res){
-	// Let's scrape Anchorman 2
-	url = 'http://www.imdb.com/title/tt1229340/';
+	url = 'http://www.nba.com/'+ team +'/stats';
 
 	request(url, function(error, response, html){
 		if(!error){
 			var $ = cheerio.load(html);
 
-			var title, release, rating;
-			var json = { title : "", release : "", rating : ""};
+			var json = {};
 
-			$('.header').filter(function(){
-		        var data = $(this);
-		        title = data.children().first().text();
-		        release = data.children().last().children().text();
-
-		        json.title = title;
-		        json.release = release;
-	        })
-
-	        $('.star-box-giga-star').filter(function(){
-	        	var data = $(this);
-	        	rating = data.text();
-
-	        	json.rating = rating;
-	        })
+			function createJSON(){
+		    var self = this;
+		    self.json = [];
+		    $('.stats-table.season-averages tr').each(function(index, value){
+		        var player = $('.playerName', this).text(),
+						num = $('.playerNumber', this).text(),
+						pos = $('.playerPosition', this).text(),
+						pts = $('.pts', this).text(),
+						reb = $('.reb', this).text(),
+						ast = $('.ast', this).text();
+						reb = $('.reb', this).text();
+						stl = $('.stl', this).text();
+		        var data = {
+							player: player,
+							num: num,
+							pos: pos,
+							pts: pts,
+							ast: ast,
+							reb: reb,
+							stl: stl,
+						};
+		        self.json.push(data);
+		    });
+		    return self.json;
+			}
 		}
 
-		fs.writeFile('output.json', JSON.stringify(json, null, 4), function(err){
-        	console.log('File successfully written! - Check your project directory for the output.json file');
+		fs.writeFile(team + '.json', JSON.stringify(createJSON(), null, 4), function(err){
+        	console.log('JSON file written for ' + team);
         })
-
-        res.send('Check your console!')
+        res.send('No errors!')
 	})
 })
 
-app.listen('8081')
-console.log('Magic happens on port 8081');
-exports = module.exports = app; 	
+app.listen('3333')
+console.log('Running on 3333');
+exports = module.exports = app;

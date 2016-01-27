@@ -1,0 +1,137 @@
+[
+    {
+        "player": "",
+        "num": "",
+        "pos": "",
+        "pts": "PTS",
+        "ast": "AST",
+        "reb": "REB",
+        "stl": "STL"
+    },
+    {
+        "player": "Joe Johnson",
+        "num": "7",
+        "pos": "Forward-Guard",
+        "pts": "11.5",
+        "ast": "3.8",
+        "reb": "3.9",
+        "stl": "0.7"
+    },
+    {
+        "player": "Jarrett Jack",
+        "num": "2",
+        "pos": "Guard",
+        "pts": "12.8",
+        "ast": "7.4",
+        "reb": "4.3",
+        "stl": "1.1"
+    },
+    {
+        "player": "Andrea Bargnani",
+        "num": "9",
+        "pos": "Center-Forward",
+        "pts": "6.9",
+        "ast": "0.3",
+        "reb": "2.1",
+        "stl": "0.1"
+    },
+    {
+        "player": "Thaddeus Young",
+        "num": "30",
+        "pos": "Forward",
+        "pts": "15.2",
+        "ast": "1.5",
+        "reb": "9",
+        "stl": "1.5"
+    },
+    {
+        "player": "Brook Lopez",
+        "num": "11",
+        "pos": "Center",
+        "pts": "19.6",
+        "ast": "1.6",
+        "reb": "8.4",
+        "stl": "0.7"
+    },
+    {
+        "player": "Wayne Ellington",
+        "num": "21",
+        "pos": "Guard",
+        "pts": "6.4",
+        "ast": "0.9",
+        "reb": "2.1",
+        "stl": "0.7"
+    },
+    {
+        "player": "Donald Sloan",
+        "num": "15",
+        "pos": "Guard",
+        "pts": "5.2",
+        "ast": "4",
+        "reb": "2.7",
+        "stl": "0.4"
+    },
+    {
+        "player": "Bojan Bogdanovic",
+        "num": "44",
+        "pos": "Guard-Forward",
+        "pts": "9.5",
+        "ast": "1.1",
+        "reb": "3.4",
+        "stl": "0.5"
+    },
+    {
+        "player": "Thomas Robinson",
+        "num": "41",
+        "pos": "Forward",
+        "pts": "3.4",
+        "ast": "0.2",
+        "reb": "3.5",
+        "stl": "0.4"
+    },
+    {
+        "player": "Willie Reed",
+        "num": "33",
+        "pos": "Forward-Center",
+        "pts": "4.2",
+        "ast": "0.2",
+        "reb": "2.7",
+        "stl": "0.1"
+    },
+    {
+        "player": "Shane Larkin",
+        "num": "0",
+        "pos": "Guard",
+        "pts": "6.8",
+        "ast": "3.7",
+        "reb": "2.1",
+        "stl": "1.3"
+    },
+    {
+        "player": "Sergey Karasev",
+        "num": "10",
+        "pos": "Guard-Forward",
+        "pts": "1.2",
+        "ast": "0.3",
+        "reb": "0.8",
+        "stl": ""
+    },
+    {
+        "player": "Markel Brown",
+        "num": "22",
+        "pos": "Guard",
+        "pts": "2.5",
+        "ast": "1",
+        "reb": "1.3",
+        "stl": "0.3"
+    },
+    {
+        "player": "Rondae Hollis-Jefferson",
+        "num": "24",
+        "pos": "Guard-Forward",
+        "pts": "5.2",
+        "ast": "1.4",
+        "reb": "6.1",
+        "stl": "1.4"
+    }
+]

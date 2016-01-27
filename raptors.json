@@ -1,0 +1,146 @@
+[
+    {
+        "player": "",
+        "num": "",
+        "pos": "",
+        "pts": "PTS",
+        "ast": "AST",
+        "reb": "REB",
+        "stl": "STL"
+    },
+    {
+        "player": "Luis Scola",
+        "num": "4",
+        "pos": "Forward",
+        "pts": "9.9",
+        "ast": "0.8",
+        "reb": "5.7",
+        "stl": "0.6"
+    },
+    {
+        "player": "Kyle Lowry",
+        "num": "7",
+        "pos": "Guard",
+        "pts": "20.9",
+        "ast": "6.4",
+        "reb": "5",
+        "stl": "2.2"
+    },
+    {
+        "player": "DeMar DeRozan",
+        "num": "10",
+        "pos": "Guard",
+        "pts": "23",
+        "ast": "4.1",
+        "reb": "4.5",
+        "stl": "1"
+    },
+    {
+        "player": "James Johnson",
+        "num": "3",
+        "pos": "Forward",
+        "pts": "5",
+        "ast": "1",
+        "reb": "2.1",
+        "stl": "0.5"
+    },
+    {
+        "player": "DeMarre Carroll",
+        "num": "5",
+        "pos": "Forward",
+        "pts": "11.7",
+        "ast": "1",
+        "reb": "4.8",
+        "stl": "1.7"
+    },
+    {
+        "player": "Patrick Patterson",
+        "num": "54",
+        "pos": "Forward",
+        "pts": "6.3",
+        "ast": "1.2",
+        "reb": "4.3",
+        "stl": "0.7"
+    },
+    {
+        "player": "Jonas Valanciunas",
+        "num": "17",
+        "pos": "Center",
+        "pts": "12.4",
+        "ast": "0.9",
+        "reb": "9.3",
+        "stl": "0.4"
+    },
+    {
+        "player": "Bismack Biyombo",
+        "num": "8",
+        "pos": "Center-Forward",
+        "pts": "5.5",
+        "ast": "0.3",
+        "reb": "8.3",
+        "stl": "0.2"
+    },
+    {
+        "player": "Cory Joseph",
+        "num": "6",
+        "pos": "Guard",
+        "pts": "8.4",
+        "ast": "3",
+        "reb": "2.5",
+        "stl": "0.8"
+    },
+    {
+        "player": "Terrence Ross",
+        "num": "31",
+        "pos": "Forward-Guard",
+        "pts": "8.7",
+        "ast": "0.7",
+        "reb": "2.3",
+        "stl": "0.8"
+    },
+    {
+        "player": "Anthony Bennett",
+        "num": "15",
+        "pos": "Forward",
+        "pts": "1.5",
+        "ast": "",
+        "reb": "1.4",
+        "stl": "0.2"
+    },
+    {
+        "player": "Lucas Nogueira",
+        "num": "92",
+        "pos": "Center",
+        "pts": "2.7",
+        "ast": "0.2",
+        "reb": "1.5",
+        "stl": "0.5"
+    },
+    {
+        "player": "Bruno Caboclo",
+        "num": "20",
+        "pos": "Forward",
+        "pts": "",
+        "ast": "",
+        "reb": "0.5",
+        "stl": "0.5"
+    },
+    {
+        "player": "Delon Wright",
+        "num": "55",
+        "pos": "Guard",
+        "pts": "0.6",
+        "ast": "0.4",
+        "reb": "0.5",
+        "stl": ""
+    },
+    {
+        "player": "Norman Powell",
+        "num": "24",
+        "pos": "Guard",
+        "pts": "1.2",
+        "ast": "0.2",
+        "reb": "0.9",
+        "stl": "0.3"
+    }
+]

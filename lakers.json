@@ -1,0 +1,146 @@
+[
+    {
+        "player": "",
+        "num": "",
+        "pos": "",
+        "pts": "PTS",
+        "ast": "AST",
+        "reb": "REB",
+        "stl": "STL"
+    },
+    {
+        "player": "Kobe Bryant",
+        "num": "24",
+        "pos": "Forward-Guard",
+        "pts": "15.8",
+        "ast": "3.5",
+        "reb": "3.9",
+        "stl": "0.9"
+    },
+    {
+        "player": "Metta World Peace",
+        "num": "37",
+        "pos": "Forward",
+        "pts": "4.9",
+        "ast": "0.9",
+        "reb": "2.5",
+        "stl": "0.6"
+    },
+    {
+        "player": "Brandon Bass",
+        "num": "2",
+        "pos": "Forward",
+        "pts": "6.3",
+        "ast": "1.1",
+        "reb": "4.2",
+        "stl": "0.5"
+    },
+    {
+        "player": "Lou Williams",
+        "num": "23",
+        "pos": "Guard",
+        "pts": "15.5",
+        "ast": "2.6",
+        "reb": "2.7",
+        "stl": "1"
+    },
+    {
+        "player": "Nick Young",
+        "num": "0",
+        "pos": "Forward-Guard",
+        "pts": "7.5",
+        "ast": "0.5",
+        "reb": "1.6",
+        "stl": "0.5"
+    },
+    {
+        "player": "Roy Hibbert",
+        "num": "17",
+        "pos": "Center",
+        "pts": "6.8",
+        "ast": "1.5",
+        "reb": "5.6",
+        "stl": "0.4"
+    },
+    {
+        "player": "Robert Sacre",
+        "num": "50",
+        "pos": "Center",
+        "pts": "3.1",
+        "ast": "0.7",
+        "reb": "2.5",
+        "stl": "0.1"
+    },
+    {
+        "player": "Ryan Kelly",
+        "num": "4",
+        "pos": "Forward",
+        "pts": "5.2",
+        "ast": "0.8",
+        "reb": "3.8",
+        "stl": "0.3"
+    },
+    {
+        "player": "Jordan Clarkson",
+        "num": "6",
+        "pos": "Guard",
+        "pts": "15.1",
+        "ast": "2.5",
+        "reb": "3.8",
+        "stl": "1.2"
+    },
+    {
+        "player": "Julius Randle",
+        "num": "30",
+        "pos": "Forward",
+        "pts": "10.6",
+        "ast": "1.6",
+        "reb": "9.6",
+        "stl": "0.7"
+    },
+    {
+        "player": "Tarik Black",
+        "num": "28",
+        "pos": "Center-Forward",
+        "pts": "3.9",
+        "ast": "0.2",
+        "reb": "4.3",
+        "stl": "0.1"
+    },
+    {
+        "player": "Anthony Brown",
+        "num": "3",
+        "pos": "Forward",
+        "pts": "3.6",
+        "ast": "0.4",
+        "reb": "2.1",
+        "stl": "0.4"
+    },
+    {
+        "player": "D'Angelo Russell",
+        "num": "1",
+        "pos": "Guard",
+        "pts": "12.2",
+        "ast": "3.3",
+        "reb": "3.6",
+        "stl": "1.2"
+    },
+    {
+        "player": "Larry Nance Jr.",
+        "num": "7",
+        "pos": "Forward",
+        "pts": "5.8",
+        "ast": "0.7",
+        "reb": "5.1",
+        "stl": "0.9"
+    },
+    {
+        "player": "Marcelo Huertas",
+        "num": "9",
+        "pos": "Guard",
+        "pts": "2.8",
+        "ast": "2.5",
+        "reb": "1.3",
+        "stl": "0.5"
+    }
+]
