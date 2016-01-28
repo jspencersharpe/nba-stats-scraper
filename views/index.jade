@@ -1,11 +1,6 @@
 html
   head
   body
-    table
-      tbody
-        each val in jsonData
-          tr 
-            each player in val
-              td= player
-              td= num
-              td= pts
+    include ./includes/nav.jade
+    h1= title
+    include ./includes/stats.jade

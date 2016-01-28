@@ -27,11 +27,15 @@ function getNBAData(url, callback) {
 	})
 }
 
+app.get('/', function(req, res){
+	res.render('index', {title: 'HI!'})
+})
+
 app.get('/:team', function(req, res) {
 	var team = req.params.team;
 	var url = 'http://www.nba.com/'+ team +'/stats';
 	getNBAData(url, function(jsonData) {
-		res.render('index', {jsonData: jsonData})
+		res.render('main', {jsonData: jsonData})
 	});
 })
 
