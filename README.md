@@ -7,6 +7,6 @@ Scrapes player statistics from nba.com.
 
 In the console, run:
 
-##node server pacers
+#node server pacers
 
 or any other team name. And it will save to pacers.json
