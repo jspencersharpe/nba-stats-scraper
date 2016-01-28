@@ -27,6 +27,33 @@ function getNBAData(url, callback) {
 		return callback(self.json)
 	})
 }
+function getMavsData(url, callback) {
+	var self = this;
+	request(url, function(error, response, html){
+		if(!error){
+			var $ = cheerio.load(html);
+			self.json = [];
+			$('.player-stats-table tr').each(function(index, value){
+				var player = $('th', this).first().text();
+				var pts = $('td', this).last().text(),
+				ast = $('td:nth-child(9)', this).text(),
+				reb = $('td:nth-child(8)', this).text(),
+				stl = $('td:nth-child(10)', this).text()
+
+					var data = {
+						player: player,
+						pts: pts,
+						ast: ast,
+						reb: reb,
+						stl: stl
+					};
+					self.json.push(data);
+			});
+		}
+		return callback(self.json)
+	})
+}
+
 
 app.get('/', function(req, res){
 	res.render('index', {title: 'Welcome'})
@@ -34,10 +61,18 @@ app.get('/', function(req, res){
 
 app.get('/:team', function(req, res) {
 	var team = req.params.team;
-	var url = 'http://www.nba.com/'+ team +'/stats';
-	getNBAData(url, function(jsonData) {
-		res.render('index', {jsonData: jsonData})
-	});
+	if (team == 'mavericks') {
+		var url = 'http://www.mavs.com/team/team-stats/';
+		getMavsData(url, function(jsonData) {
+			console.log(jsonData);
+			res.render('index', {jsonData: jsonData})
+		})
+	} else {
+		var url = 'http://www.nba.com/'+ team +'/stats';
+		getNBAData(url, function(jsonData) {
+			res.render('index', {jsonData: jsonData})
+		});
+	}
 })
 
 app.listen('3333')
