@@ -1,0 +1,146 @@
+[
+    {
+        "player": "",
+        "num": "",
+        "pos": "",
+        "pts": "PTS",
+        "ast": "AST",
+        "reb": "REB",
+        "stl": "STL"
+    },
+    {
+        "player": "David Lee",
+        "num": "42",
+        "pos": "Forward-Center",
+        "pts": "7.1",
+        "ast": "1.8",
+        "reb": "4.3",
+        "stl": "0.4"
+    },
+    {
+        "player": "Amir Johnson",
+        "num": "90",
+        "pos": "Forward",
+        "pts": "7.9",
+        "ast": "1.7",
+        "reb": "6.3",
+        "stl": "0.7"
+    },
+    {
+        "player": "Jonas Jerebko",
+        "num": "8",
+        "pos": "Forward",
+        "pts": "3.5",
+        "ast": "0.8",
+        "reb": "3.1",
+        "stl": "0.3"
+    },
+    {
+        "player": "Evan Turner",
+        "num": "11",
+        "pos": "Guard-Forward",
+        "pts": "9.3",
+        "ast": "4",
+        "reb": "4.5",
+        "stl": "0.9"
+    },
+    {
+        "player": "Avery Bradley",
+        "num": "0",
+        "pos": "Guard",
+        "pts": "14.8",
+        "ast": "2.1",
+        "reb": "2.6",
+        "stl": "1.6"
+    },
+    {
+        "player": "Isaiah Thomas",
+        "num": "4",
+        "pos": "Guard",
+        "pts": "21.7",
+        "ast": "6.7",
+        "reb": "3",
+        "stl": "1.2"
+    },
+    {
+        "player": "Tyler Zeller",
+        "num": "44",
+        "pos": "Center-Forward",
+        "pts": "4.6",
+        "ast": "0.3",
+        "reb": "2.4",
+        "stl": "0.2"
+    },
+    {
+        "player": "Jared Sullinger",
+        "num": "7",
+        "pos": "Center-Forward",
+        "pts": "9.8",
+        "ast": "2.2",
+        "reb": "8.7",
+        "stl": "0.9"
+    },
+    {
+        "player": "Jae Crowder",
+        "num": "99",
+        "pos": "Forward",
+        "pts": "14.5",
+        "ast": "1.9",
+        "reb": "5.1",
+        "stl": "1.8"
+    },
+    {
+        "player": "Kelly Olynyk",
+        "num": "41",
+        "pos": "Center-Forward",
+        "pts": "10.1",
+        "ast": "1.6",
+        "reb": "4.4",
+        "stl": "0.9"
+    },
+    {
+        "player": "James Young",
+        "num": "13",
+        "pos": "Guard-Forward",
+        "pts": "1.4",
+        "ast": "0.4",
+        "reb": "1.1",
+        "stl": "0.2"
+    },
+    {
+        "player": "Marcus Smart",
+        "num": "36",
+        "pos": "Guard",
+        "pts": "9.2",
+        "ast": "3.2",
+        "reb": "4.5",
+        "stl": "1.7"
+    },
+    {
+        "player": "RJ Hunter",
+        "num": "28",
+        "pos": "Guard",
+        "pts": "2.9",
+        "ast": "0.4",
+        "reb": "1.3",
+        "stl": "0.5"
+    },
+    {
+        "player": "Jordan Mickey",
+        "num": "55",
+        "pos": "Forward",
+        "pts": "2.3",
+        "ast": "0.3",
+        "reb": "1",
+        "stl": ""
+    },
+    {
+        "player": "Terry Rozier",
+        "num": "12",
+        "pos": "Guard",
+        "pts": "1.6",
+        "ast": "0.6",
+        "reb": "1.1",
+        "stl": ""
+    }
+]

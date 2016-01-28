@@ -4,38 +4,38 @@ var request = require('request');
 var cheerio = require('cheerio');
 var app     = express();
 
-var team = process.argv[2];
 
-app.get('/scrape', function(req, res){
-	url = 'http://www.nba.com/'+ team +'/stats';
-
+function getNBAData(url, callback) {
+	var self = this;
 	request(url, function(error, response, html){
 		if(!error){
 			var $ = cheerio.load(html);
-			var json = {};
-
-			function createJSON(){
-		    var self = this;
-		    self.json = [];
-		    $('.stats-table.season-averages tr').each(function(index, value){
-		        var player = $('.playerName', this).text(), num = $('.playerNumber', this).text(),
-						pos = $('.playerPosition', this).text(), pts = $('.pts', this).text(),
-						reb = $('.reb', this).text(), ast = $('.ast', this).text();
-						reb = $('.reb', this).text(); stl = $('.stl', this).text();
-		        var data = {
-							player: player, num: num, pos: pos, pts: pts, ast: ast, reb: reb, stl: stl,
-						};
-		        self.json.push(data);
-		    });
-		    return self.json;
-			}
+			self.json = [];
+			$('.stats-table.season-averages tr').each(function(index, value){
+					var player = $('.playerName', this).text(), num = $('.playerNumber', this).text(),
+					pos = $('.playerPosition', this).text(), pts = $('.pts', this).text(),
+					reb = $('.reb', this).text(), ast = $('.ast', this).text();
+					reb = $('.reb', this).text(); stl = $('.stl', this).text();
+					var data = {
+						player: player, num: num, pos: pos, pts: pts, ast: ast, reb: reb, stl: stl,
+					};
+					self.json.push(data);
+			});
 		}
 
-		fs.writeFile(team + '.json', JSON.stringify(createJSON(), null, 4), function(err){
-      console.log('JSON file written for ' + team);
-    })
-    res.send('No errors!')
+		console.log(self.json);
+
+		return callback(self.json)
 	})
+}
+
+app.get('/:team', function(req, res) {
+	var team = req.params.team;
+	var url = 'http://www.nba.com/'+ team +'/stats';
+	getNBAData(url, function(jsonData) {
+		console.log(jsonData);
+		res.json(jsonData);
+	});
 })
 
 app.listen('3333')
