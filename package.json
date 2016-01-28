@@ -5,9 +5,10 @@
   "main": "server.js",
   "author": "Scotch",
   "dependencies": {
+    "cheerio": "latest",
     "express": "latest",
-    "request": "latest",
-    "cheerio": "latest"
+    "jade": "^1.11.0",
+    "request": "latest"
   },
   "scripts": {
     "start": "node server.js"

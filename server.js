@@ -4,6 +4,7 @@ var request = require('request');
 var cheerio = require('cheerio');
 var app     = express();
 
+app.set('view engine', 'jade');
 
 function getNBAData(url, callback) {
 	var self = this;
@@ -22,9 +23,6 @@ function getNBAData(url, callback) {
 					self.json.push(data);
 			});
 		}
-
-		console.log(self.json);
-
 		return callback(self.json)
 	})
 }
@@ -33,8 +31,7 @@ app.get('/:team', function(req, res) {
 	var team = req.params.team;
 	var url = 'http://www.nba.com/'+ team +'/stats';
 	getNBAData(url, function(jsonData) {
-		console.log(jsonData);
-		res.json(jsonData);
+		res.render('index', {jsonData: jsonData})
 	});
 })
 
