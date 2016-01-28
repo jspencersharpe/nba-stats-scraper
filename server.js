@@ -28,7 +28,7 @@ function getNBAData(url, callback) {
 }
 
 app.get('/', function(req, res){
-	res.render('index', {title: 'HI!'})
+	res.render('index', {title: 'Welcome'})
 })
 
 app.get('/:team', function(req, res) {
