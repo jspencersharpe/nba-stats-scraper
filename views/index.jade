@@ -1,6 +1,12 @@
 html
   head
+    link(href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/flatly/bootstrap.min.css", rel="stylesheet")
+
   body
-    include ./includes/nav.jade
-    h1= title
-    include ./includes/stats.jade
+    section
+      include ./includes/nav.jade
+    section 
+      h1= title
+    section 
+      if(jsonData)
+        include ./includes/stats.jade

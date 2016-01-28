@@ -1,8 +1,9 @@
-table
-  tbody
-    each val in jsonData
-      tr 
-        each player in val
-          td= player
-          td= num
-          td= pts
+.col-xs-12
+  table.table.table-hover
+    tbody
+      each val in jsonData
+        tr 
+          each player in val
+            td= player
+            td= num
+            td= pts
