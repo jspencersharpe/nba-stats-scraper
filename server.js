@@ -33,7 +33,7 @@ function getMavsData(url, callback) {
 		if(!error){
 			var $ = cheerio.load(html);
 			self.json = [];
-			$('.player-stats-table tr').each(function(index, value){
+			$('.player-stats-table').first().find('tr').each(function(index, value){
 				var player = $('th', this).first().text();
 				var pts = $('td', this).last().text(),
 				ast = $('td:nth-child(9)', this).text(),
@@ -53,10 +53,34 @@ function getMavsData(url, callback) {
 		return callback(self.json)
 	})
 }
-
+function getNCAAIDs(url, callback) {
+	var self = this;
+	request(url, function(error, response, html){
+		if(!error){
+			var $ = cheerio.load(html);
+			self.json = [];
+			$('.medium-logos h5').each(function(index, value){
+					var link = $('a', this).attr('href');
+					var data = {
+						link : link
+					};
+					self.json.push(data);
+			});
+		}
+		return callback(self.json)
+	})
+}
 
 app.get('/', function(req, res){
 	res.render('index', {title: 'Welcome'})
+})
+
+app.get('/:ncaa', function(req, res){
+	var team = req.params.ncaa;
+	var url = 'http://espn.go.com/mens-college-basketball/teams';
+	getNCAAIDs(url, function(jsonData) {
+		res.render('index', {jsonData: jsonData})
+	});
 })
 
 app.get('/:team', function(req, res) {
@@ -64,7 +88,6 @@ app.get('/:team', function(req, res) {
 	if (team == 'mavericks') {
 		var url = 'http://www.mavs.com/team/team-stats/';
 		getMavsData(url, function(jsonData) {
-			console.log(jsonData);
 			res.render('index', {jsonData: jsonData})
 		})
 	} else {
