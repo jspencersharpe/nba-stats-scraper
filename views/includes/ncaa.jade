@@ -1,0 +1,7 @@
+h1 Teams
+ table
+  tbody
+   each team in schoolData
+    tr 
+     td 
+      a(href='#{team.link}', target='_blank')= team.teamName

@@ -61,8 +61,13 @@ function getNCAAIDs(url, callback) {
 			self.json = [];
 			$('.medium-logos h5').each(function(index, value){
 					var link = $('a', this).attr('href');
+					var spl = link.split('_');
+					var id = spl[1];
+					var splt = id.split('/')
+					var teamName = splt[3];
 					var data = {
-						link : link
+						teamName : teamName,
+						link: link
 					};
 					self.json.push(data);
 			});
@@ -75,11 +80,11 @@ app.get('/', function(req, res){
 	res.render('index', {title: 'Welcome'})
 })
 
-app.get('/:ncaa', function(req, res){
+app.get('/ncaa/', function(req, res){
 	var team = req.params.ncaa;
 	var url = 'http://espn.go.com/mens-college-basketball/teams';
-	getNCAAIDs(url, function(jsonData) {
-		res.render('index', {jsonData: jsonData})
+	getNCAAIDs(url, function(schoolData) {
+		res.render('index', {schoolData: schoolData})
 	});
 })
 
