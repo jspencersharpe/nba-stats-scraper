@@ -1,20 +1,20 @@
-var express = require('express');
-var fs = require('fs');
-var request = require('request');
-var cheerio = require('cheerio');
-var app = express();
-var path = require('path');
+const express = require('express');
+const fs = require('fs');
+const request = require('request');
+const cheerio = require('cheerio');
+const app = express();
+const path = require('path');
 
 app.set('view engine', 'jade');
 
-function getNBAData(url, callback) {
- var self = this;
- request(url, function(error, response, html) {
+const getNBAData = (url, callback) => {
+ let self = this;
+ request(url, (error, response, html) => {
   if (!error) {
-   var $ = cheerio.load(html);
+   let $ = cheerio.load(html);
    self.json = [];
    $('.stats-table.season-averages tr').each(function(index, value) {
-    var player = $('.playerName', this).text(),
+    let player = $('.playerName', this).text(),
      num = $('.playerNumber', this).text(),
      pos = $('.playerPosition', this).text(),
      pts = $('.pts', this).text(),
@@ -22,7 +22,7 @@ function getNBAData(url, callback) {
      ast = $('.ast', this).text();
      reb = $('.reb', this).text();
      stl = $('.stl', this).text();
-    var data = {
+    let data = {
      player: player,
      num: num,
      pos: pos,
@@ -38,46 +38,31 @@ function getNBAData(url, callback) {
  })
 }
 
-function getMavsData(url, callback) {
- var self = this;
- request(url, function(error, response, html) {
-  if (!error) {
-   var $ = cheerio.load(html);
-   self.json = [];
-   $('.player-stats-table').first().find('tr').each(function(index, value) {
-    var player = $('th', this).first().text();
-    var pts = $('td', this).last().text(),
-     ast = $('td:nth-child(9)', this).text(),
-     reb = $('td:nth-child(8)', this).text(),
-     stl = $('td:nth-child(10)', this).text()
 
-    var data = {
-     player: player,
-     pts: pts,
-     ast: ast,
-     reb: reb,
-     stl: stl
-    };
-    self.json.push(data);
-   });
-  }
-  return callback(self.json)
- })
+const getMavsData = (url, callback) => {
+	let self = this;
+	request(url, (error, response, html) => {
+		if(!error){
+			self.json = [];
+      self.json.push("The mavs are terrible. They have their own separate website so stats are not available.")
+		}
+		return callback(self.json)
+	})
 }
 
-function getNCAAIDs(url, callback) {
- var self = this;
- request(url, function(error, response, html) {
+const getNCAAIDs = (url, callback) => {
+ let self = this;
+ request(url, (error, response, html) => {
   if (!error) {
-   var $ = cheerio.load(html);
+   let $ = cheerio.load(html);
    self.json = [];
    $('.medium-logos h5').each(function(index, value) {
-    var link = $('a', this).attr('href');
-    var spl = link.split('_');
-    var id = spl[1];
-    var splt = id.split('/')
-    var teamName = splt[3];
-    var data = {
+    let link = $('a', this).attr('href');
+    let spl = link.split('_');
+    let id = spl[1];
+    let splt = id.split('/')
+    let teamName = splt[3];
+    let data = {
      teamName: teamName,
      link: link
     };
@@ -88,34 +73,34 @@ function getNCAAIDs(url, callback) {
  })
 }
 
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
  res.render('index', {
   title: 'Welcome'
  })
 })
 
-app.get('/ncaa/', function(req, res) {
- var team = req.params.ncaa;
- var url = 'http://espn.go.com/mens-college-basketball/teams';
- getNCAAIDs(url, function(schoolData) {
+app.get('/ncaa/', (req, res) => {
+ let team = req.params.ncaa;
+ let url = 'http://espn.go.com/mens-college-basketball/teams';
+ getNCAAIDs(url, (schoolData) => {
   res.render('index', {
    schoolData: schoolData
   })
  });
 })
 
-app.get('/:team', function(req, res) {
- var team = req.params.team;
+app.get('/:team', (req, res) => {
+ let team = req.params.team;
  if (team == 'mavericks') {
-  var url = 'http://www.mavs.com/team/team-stats/';
-  getMavsData(url, function(jsonData) {
+  let url = 'http://www.mavs.com/team/team-stats/';
+  getMavsData(url, (jsonData) => {
    res.render('index', {
     jsonData: jsonData
    })
   })
  } else {
-  var url = 'http://www.nba.com/' + team + '/stats';
-  getNBAData(url, function(jsonData) {
+  let url = 'http://www.nba.com/' + team + '/stats';
+  getNBAData(url, (jsonData) => {
    res.render('index', {
     jsonData: jsonData
    })
