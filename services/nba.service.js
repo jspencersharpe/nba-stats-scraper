@@ -14,18 +14,26 @@ exports.getNBAData = (url, callback) => {
      num = $('.playerNumber', this).text(),
      pos = $('.playerPosition', this).text(),
      pts = $('.pts', this).text(),
+     fg_pct = $('.fg_pct', this).text();
+     fg3_pct = $('.fg3_pct', this).text();
      reb = $('.reb', this).text(),
      ast = $('.ast', this).text();
      reb = $('.reb', this).text();
      stl = $('.stl', this).text();
+     tov = $('.tov', this).text();
+     pf = $('.pf', this).text();
     let data = {
      player: player,
      num: num,
      pos: pos,
      pts: pts,
+     fg_pct: fg_pct,
+     fg3_pct: fg3_pct,
      ast: ast,
      reb: reb,
      stl: stl,
+     tov: tov,
+     pf: pf
     };
     self.json.push(data);
    });
