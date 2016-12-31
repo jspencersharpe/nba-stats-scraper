@@ -1,7 +1,14 @@
-h1 Teams
- table
-  tbody
-   each team in schoolData
-    tr 
-     td 
-      a(href='#{team.link}', target='_blank')= team.teamName
+html
+  head
+    link(href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/flatly/bootstrap.min.css", rel="stylesheet")
+  body 
+    .col-xs-12
+      a(href='/') Back to all teams
+    .col-xs-12
+      h1 Teams
+       table
+        tbody
+         each team in schoolData
+          tr 
+           td 
+            a(href='#{team.link}', target='_blank')= team.teamName

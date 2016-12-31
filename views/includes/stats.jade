@@ -1,9 +1,17 @@
-.col-xs-12
-  table.table.table-hover
-    tbody
-      each val in jsonData
-        tr 
-          each player in val
-            td= player
-            td= num
-            td= pts
+html
+  head
+    link(href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/flatly/bootstrap.min.css", rel="stylesheet")
+
+  body
+    .col-xs-12
+      a(href='/') Back to all teams
+    .col-xs-12
+      h1= team
+      table.table.table-hover
+        tbody
+          each val in jsonData
+            tr 
+              each player in val
+                td= player
+                td= num
+                td= pts
