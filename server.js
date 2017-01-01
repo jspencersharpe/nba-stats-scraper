@@ -1,14 +1,15 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const nbaService = require('./services/nba.service.js');
-const ncaaService = require('./services/ncaa.service.js');
+const nbaService = require('./services/nba.service');
+const ncaaService = require('./services/ncaa.service');
+const format = require('./helpers/format');
 
 app.set('view engine', 'jade');
 
 app.get('/', (req, res) => {
  res.render('index', {})
-})
+});
 
 app.get('/ncaa/', (req, res) => {
  let team = req.params.ncaa;
@@ -18,7 +19,7 @@ app.get('/ncaa/', (req, res) => {
    schoolData: schoolData
   })
  });
-})
+});
 
 app.get('/:team', (req, res) => {
  let team = req.params.team;
@@ -28,20 +29,18 @@ app.get('/:team', (req, res) => {
    res.render('includes/mavs')
   })
  } else {
-  let url = 'http://www.nba.com/' + team + '/stats';
-  nbaService.getNBAData(url, (jsonData) => {
-   res.render('includes/stats', {
-    jsonData: jsonData,
-    team: getTeamName(url)
-   })
+   let url = 'http://www.nba.com/' + team + '/stats';
+   nbaService.getNBAData(url, (jsonData) => {
+     let playerData = format.formatStat(jsonData.playerData);
+     let teamData = jsonData.teamData;
+     res.render('includes/stats', {
+       playerData: playerData,
+       team: format.formatTeamName(url),
+       teamData: teamData
+     })
   });
  }
-})
-
-const getTeamName = (url) => {
-  let newUrl = url.split('/');
-  return newUrl[3].toUpperCase();
-}
+});
 
 app.listen('3333')
 console.log('Running on 3333');

@@ -8,37 +8,52 @@ html
     .col-xs-12
       a(href='/') Back to all teams
     .col-xs-12
+      img(src=teamData.teamLogo)
       h1= team
       table#stats-table.table.table-hover.tablesorter
         thead 
           tr 
-          if(jsonData[0])
-            th(style="cursor: pointer") Name
-            th(style="cursor: pointer") Number
-            th(style="cursor: pointer") Position
-            th(style="cursor: pointer")= jsonData[0].pts
-            th(style="cursor: pointer")= jsonData[0].fg_pct
-            th(style="cursor: pointer")= jsonData[0].fg3_pct
-            th(style="cursor: pointer")= jsonData[0].ast
-            th(style="cursor: pointer")= jsonData[0].reb
-            th(style="cursor: pointer")= jsonData[0].stl
-            th(style="cursor: pointer")= jsonData[0].tov
-            th(style="cursor: pointer")= jsonData[0].pf
+          if(playerData[0])
+            th.text-center(style="cursor: pointer") Name
+            th.text-center(style="cursor: pointer") Number
+            th.text-center(style="cursor: pointer") Position
+            th(style="cursor: pointer") G
+            th(style="cursor: pointer")= playerData[0].pts
+            th(style="cursor: pointer")= playerData[0].fg_pct
+            th(style="cursor: pointer")= playerData[0].fg3_pct
+            th(style="cursor: pointer")= playerData[0].ft_pct
+            th(style="cursor: pointer")= playerData[0].ast
+            th(style="cursor: pointer")= playerData[0].reb
+            th(style="cursor: pointer")= playerData[0].oreb
+            th(style="cursor: pointer")= playerData[0].dreb
+            th(style="cursor: pointer")= playerData[0].stl
+            th(style="cursor: pointer")= playerData[0].tov
+            th(style="cursor: pointer")= playerData[0].pf
         tbody
-          each val, index in jsonData
+          each val, index in playerData
             tr
             if (index !== 0)
-              td= val.player
-              td= val.num
-              td= val.pos
+              td.text-center= val.player
+              td.text-center= val.num
+              td.text-center= val.pos
+              td= val.gp
               td= val.pts 
               td= val.fg_pct
               td= val.fg3_pct
+              td= val.ft_pct
               td= val.ast 
               td= val.reb 
+              td= val.oreb 
+              td= val.dreb
               td= val.stl 
               td= val.tov 
               td= val.pf
+              
+style.
+  th, td {
+    text-align: left;
+  }
+  
 script.
   $(document).ready(function() {
     $("#stats-table").tablesorter();

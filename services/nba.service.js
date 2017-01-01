@@ -8,37 +8,56 @@ exports.getNBAData = (url, callback) => {
  request(url, (error, response, html) => {
   if (!error) {
    let $ = cheerio.load(html);
-   self.json = [];
+   self.playerInfo = [];
+   self.teamInfo = [];
+   $('#logo').each(function(index, value) {
+     let img = $('img');
+     let teamLogo = img[0].attribs.src;
+     self.teamInfo = {
+       teamLogo: teamLogo
+     };
+   });
    $('.stats-table.season-averages tr').each(function(index, value) {
     let player = $('.playerName', this).text(),
      num = $('.playerNumber', this).text(),
      pos = $('.playerPosition', this).text(),
+     gp = $('.gp', this).text(),
      pts = $('.pts', this).text(),
-     fg_pct = $('.fg_pct', this).text();
-     fg3_pct = $('.fg3_pct', this).text();
+     fg_pct = $('.fg_pct', this).text(),
+     fg3_pct = $('.fg3_pct', this).text(),
+     ft_pct = $('.ft_pct', this).text(),
+     oreb = $('.oreb', this).text(),
+     dreb = $('.dreb', this).text(),
+     ast = $('.ast', this).text(),
      reb = $('.reb', this).text(),
-     ast = $('.ast', this).text();
-     reb = $('.reb', this).text();
-     stl = $('.stl', this).text();
-     tov = $('.tov', this).text();
+     stl = $('.stl', this).text(),
+     tov = $('.tov', this).text(),
      pf = $('.pf', this).text();
     let data = {
-     player: player,
-     num: num,
-     pos: pos,
-     pts: pts,
-     fg_pct: fg_pct,
-     fg3_pct: fg3_pct,
-     ast: ast,
-     reb: reb,
-     stl: stl,
-     tov: tov,
-     pf: pf
+      player: player,
+      gp: gp,
+      num: num,
+      pos: pos,
+      pts: pts,
+      fg_pct: fg_pct,
+      fg3_pct: fg3_pct,
+      ft_pct: ft_pct,
+      ast: ast,
+      reb: reb,
+      oreb: oreb,
+      dreb: dreb,
+      stl: stl,
+      tov: tov,
+      pf: pf
     };
-    self.json.push(data);
+    self.playerInfo.push(data);
    });
+   let teamData = {
+     playerData: self.playerInfo,
+     teamData: self.teamInfo
+   }
+   return callback(teamData);
   }
-  return callback(self.json)
  })
 }
 
