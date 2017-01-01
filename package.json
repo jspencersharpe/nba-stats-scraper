@@ -8,6 +8,7 @@
     "cheerio": "latest",
     "express": "latest",
     "jade": "^1.11.0",
+    "lodash": "^4.17.4",
     "request": "latest"
   },
   "scripts": {

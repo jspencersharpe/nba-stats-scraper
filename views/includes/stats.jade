@@ -1,15 +1,46 @@
 html
   head
     link(href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/flatly/bootstrap.min.css", rel="stylesheet")
+    script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js")
+    script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.28.3/js/jquery.tablesorter.min.js")
 
   body
     .col-xs-12
       a(href='/') Back to all teams
     .col-xs-12
       h1= team
-      table.table.table-hover
+      table#stats-table.table.table-hover.tablesorter
+        thead 
+          tr 
+          if(jsonData[0])
+            th(style="cursor: pointer") Name
+            th(style="cursor: pointer") Number
+            th(style="cursor: pointer") Position
+            th(style="cursor: pointer")= jsonData[0].pts
+            th(style="cursor: pointer")= jsonData[0].fg_pct
+            th(style="cursor: pointer")= jsonData[0].fg3_pct
+            th(style="cursor: pointer")= jsonData[0].ast
+            th(style="cursor: pointer")= jsonData[0].reb
+            th(style="cursor: pointer")= jsonData[0].stl
+            th(style="cursor: pointer")= jsonData[0].tov
+            th(style="cursor: pointer")= jsonData[0].pf
         tbody
-          each val in jsonData
-            tr 
-              each player in val
-                td= player
+          each val, index in jsonData
+            tr
+            if (index !== 0)
+              td= val.player
+              td= val.num
+              td= val.pos
+              td= val.pts 
+              td= val.fg_pct
+              td= val.fg3_pct
+              td= val.ast 
+              td= val.reb 
+              td= val.stl 
+              td= val.tov 
+              td= val.pf
+script.
+  $(document).ready(function() {
+    $("#stats-table").tablesorter();
+    $("#stats-table").tablesorter( {sortList: [[0,0], [1,0]]} );
+  })

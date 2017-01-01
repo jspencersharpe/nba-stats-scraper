@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const _ = require('lodash');
 const nbaService = require('./services/nba.service.js');
 const ncaaService = require('./services/ncaa.service.js');
 
@@ -25,9 +26,7 @@ app.get('/:team', (req, res) => {
  if (team == 'mavericks') {
   let url = 'http://www.mavs.com/team/team-stats/';
   nbaService.getMavsData(url, (jsonData) => {
-   res.render('index', {
-    jsonData: jsonData
-   })
+   res.render('includes/mavs')
   })
  } else {
   let url = 'http://www.nba.com/' + team + '/stats';
