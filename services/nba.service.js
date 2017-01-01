@@ -10,6 +10,7 @@ exports.getNBAData = (url, callback) => {
    let $ = cheerio.load(html);
    self.playerInfo = [];
    self.teamInfo = [];
+   self.imagesArr = [];
    $('#logo').each(function(index, value) {
      let img = $('img');
      let teamLogo = img[0].attribs.src;
@@ -19,6 +20,7 @@ exports.getNBAData = (url, callback) => {
    });
    $('.stats-table.season-averages tr').each(function(index, value) {
     let player = $('.playerName', this).text(),
+     playerImg = $('.player-name__inner-wrapper img'),
      num = $('.playerNumber', this).text(),
      pos = $('.playerPosition', this).text(),
      gp = $('.gp', this).text(),
@@ -33,6 +35,7 @@ exports.getNBAData = (url, callback) => {
      stl = $('.stl', this).text(),
      tov = $('.tov', this).text(),
      pf = $('.pf', this).text();
+     self.imagesArr.push(playerImg[index].attribs.src);
     let data = {
       player: player,
       gp: gp,
@@ -52,6 +55,10 @@ exports.getNBAData = (url, callback) => {
     };
     self.playerInfo.push(data);
    });
+   self.imagesArr.unshift('');
+   self.playerInfo.forEach((value, index) => {
+     return value.pic = self.imagesArr[index];
+   })
    let teamData = {
      playerData: self.playerInfo,
      teamData: self.teamInfo

@@ -14,10 +14,11 @@ html
         thead 
           tr 
           if(playerData[0])
+            th 
             th.text-center(style="cursor: pointer") Name
             th.text-center(style="cursor: pointer") Number
             th.text-center(style="cursor: pointer") Position
-            th(style="cursor: pointer") G
+            th(style="cursor: pointer") GP
             th(style="cursor: pointer")= playerData[0].pts
             th(style="cursor: pointer")= playerData[0].fg_pct
             th(style="cursor: pointer")= playerData[0].fg3_pct
@@ -33,6 +34,8 @@ html
           each val, index in playerData
             tr
             if (index !== 0)
+              td 
+                img.player-pic(src=val.pic)
               td.text-center= val.player
               td.text-center= val.num
               td.text-center= val.pos
@@ -52,6 +55,10 @@ html
 style.
   th, td {
     text-align: left;
+  }
+  
+  .player-pic {
+    max-height: 100px;
   }
   
 script.
