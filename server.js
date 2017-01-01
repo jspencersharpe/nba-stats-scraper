@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const _ = require('lodash');
 const nbaService = require('./services/nba.service.js');
 const ncaaService = require('./services/ncaa.service.js');
 
