@@ -67,14 +67,3 @@ exports.getNBAData = (url, callback) => {
   }
  })
 }
-
-exports.getMavsData = (url, callback) => {
-  let self = this;
-  request(url, (error, response, html) => {
-  	if(!error){
-  		self.json = [];
-      self.json.push("The mavs are terrible. They have their own separate website so stats are not available.")
-  	}
-  	return callback(self.json)
-  })
-}

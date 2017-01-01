@@ -23,23 +23,18 @@ app.get('/ncaa/', (req, res) => {
 
 app.get('/:team', (req, res) => {
  let team = req.params.team;
- if (team == 'mavericks') {
-  let url = 'http://www.mavs.com/team/team-stats/';
-  nbaService.getMavsData(url, (jsonData) => {
-   res.render('includes/mavs')
-  })
- } else {
-   let url = 'http://www.nba.com/' + team + '/stats';
-   nbaService.getNBAData(url, (jsonData) => {
-     let playerData = format.formatStat(jsonData.playerData);
-     let teamData = jsonData.teamData;
-     res.render('includes/stats', {
-       playerData: playerData,
-       team: format.formatTeamName(url),
-       teamData: teamData
-     })
-  });
- }
+ let url = 'http://www.nba.com/' + team + '/stats';
+ if (team == 'mavericks') { res.render('includes/mavs'); return; }
+
+ nbaService.getNBAData(url, (jsonData) => {
+   let playerData = format.formatStat(jsonData.playerData);
+   let teamData = jsonData.teamData;
+   res.render('includes/stats', {
+     playerData: playerData,
+     team: format.formatTeamName(url),
+     teamData: teamData
+   })
+});
 });
 
 app.listen('3333')
