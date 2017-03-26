@@ -23,3 +23,25 @@ exports.formatTeamName = (url) => {
   let newUrl = url.split('/');
   return newUrl[3].toUpperCase();
 }
+
+exports.formatTeamData = (data) => {
+  data.forEach((value, index) => {
+    value.btnText = 'View Players';
+    value.className = 'nba-team';
+    if (value.name === 'Philadelphia 76ers') {
+      value.route = 'sixers';
+    } else {
+      value.route = value.name.split(' ').splice(-1)[0].toLowerCase();
+    }
+  });
+
+  data.push({
+    route: 'ncaa',
+    btnText: 'View Players',
+    className: 'ncaa',
+    url: 'https://pbs.twimg.com/profile_images/188987758/NCAA_primaryc.gif',
+    route: '/ncaa'
+  });
+
+  return data;
+}

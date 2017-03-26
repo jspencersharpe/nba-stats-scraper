@@ -1,0 +1,15 @@
+.container-fluid
+  .album
+    .row 
+      each team in teamsList
+        .col-md-3.text-center
+          img.rounded-circle(src=team.url, class=team.className)
+          h3= team.name
+          a.btn.btn-secondary(href=team.route)= team.btnText
+            | »
+
+style.
+  .ncaa {
+    padding: 30px;
+    max-width: 180px;
+  }
