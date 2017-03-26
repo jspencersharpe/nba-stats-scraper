@@ -1,8 +1,14 @@
 html
   head
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous")
+    link(rel="stylesheet", href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
   body 
-    .col-12
-      a(href='/') Back to all teams
-    .col-12
-      h1 The mavericks are the only team in the NBA who's link redirects to their own website, so their statistics are not in this app
+    .container-fluid
+      .row.mb-4.mt-2
+        .col-12
+          a(href='/')
+            i.fa.fa-arrow-left
+            |  Back to all teams
+      .row
+        .col-12
+          h1 The mavericks are the only team in the NBA who's link redirects to their own website, so their statistics are not in this app

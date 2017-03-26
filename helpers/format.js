@@ -37,7 +37,7 @@ exports.formatTeamData = (data) => {
 
   data.push({
     route: 'ncaa',
-    btnText: 'View Players',
+    btnText: 'View Teams',
     className: 'ncaa',
     url: 'https://pbs.twimg.com/profile_images/188987758/NCAA_primaryc.gif',
     route: '/ncaa'
