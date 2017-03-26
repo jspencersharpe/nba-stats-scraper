@@ -3,10 +3,12 @@ html
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous")
 
   body
-    section
-      include ./includes/nav.jade
     section 
-      h1= title
+      .jumbotron
+        h1 NBA Stats
+    section
+      include ./includes/teams.jade
     section
       if(schoolData)
         include ./includes/ncaa.jade
+        
