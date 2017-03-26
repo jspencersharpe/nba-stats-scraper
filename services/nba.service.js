@@ -58,7 +58,7 @@ exports.getNBAData = (url, callback) => {
    self.imagesArr.unshift('');
    self.playerInfo.forEach((value, index) => {
      return value.pic = self.imagesArr[index];
-   })
+   });
    let teamData = {
      playerData: self.playerInfo,
      teamData: self.teamInfo
