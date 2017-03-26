@@ -42,7 +42,8 @@ html
                 if (index !== 0)
                   td 
                     img.player-pic(src=val.pic)
-                  td.text-center= val.player
+                  td.text-center
+                    a(href=val.link, target='_blank')= val.player
                   td.text-center= val.num
                   td.text-center= val.pos
                   td.text-left= val.gp
