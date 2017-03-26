@@ -1,56 +1,62 @@
 html
   head
-    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous")
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous")
+    link(rel="stylesheet", href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
     script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js")
     script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.28.3/js/jquery.tablesorter.min.js")
 
   body
-    .col-12
-      a(href='/') Back to all teams
-    .col-12
-      img(src=teamData.teamLogo)
-      h1= team
-      table#stats-table.table.table-hover.tablesorter
-        thead 
-          tr 
-          if(playerData[0])
-            th 
-            th.text-center(style="cursor: pointer") Name
-            th.text-center(style="cursor: pointer") Number
-            th.text-center(style="cursor: pointer") Position
-            th.text-left(style="cursor: pointer") GP
-            th.text-left(style="cursor: pointer")= playerData[0].pts
-            th.text-left(style="cursor: pointer")= playerData[0].fg_pct
-            th.text-left(style="cursor: pointer")= playerData[0].fg3_pct
-            th.text-left(style="cursor: pointer")= playerData[0].ft_pct
-            th.text-left(style="cursor: pointer")= playerData[0].ast
-            th.text-left(style="cursor: pointer")= playerData[0].reb
-            th.text-left(style="cursor: pointer")= playerData[0].oreb
-            th.text-left(style="cursor: pointer")= playerData[0].dreb
-            th.text-left(style="cursor: pointer")= playerData[0].stl
-            th.text-left(style="cursor: pointer")= playerData[0].tov
-            th.text-left(style="cursor: pointer")= playerData[0].pf
-        tbody
-          each val, index in playerData
-            tr
-            if (index !== 0)
-              td 
-                img.player-pic(src=val.pic)
-              td.text-center= val.player
-              td.text-center= val.num
-              td.text-center= val.pos
-              td.text-left= val.gp
-              td.text-left= val.pts 
-              td.text-left= val.fg_pct
-              td.text-left= val.fg3_pct
-              td.text-left= val.ft_pct
-              td.text-left= val.ast 
-              td.text-left= val.reb 
-              td.text-left= val.oreb 
-              td.text-left= val.dreb
-              td.text-left= val.stl 
-              td.text-left= val.tov 
-              td.text-left= val.pf
+    .container-fluid
+      .row.mb-4.mt-2
+        .col-12
+          a(href='/')
+            i.fa.fa-arrow-left
+            |  Back to all teams
+      .row 
+        .col-12
+          img(src=teamData.teamLogo)
+          h1= team
+          table#stats-table.table.table-hover.tablesorter
+            thead 
+              tr 
+              if(playerData[0])
+                th 
+                th.text-center(style="cursor: pointer") Name
+                th.text-center(style="cursor: pointer") Number
+                th.text-center(style="cursor: pointer") Position
+                th.text-left(style="cursor: pointer") GP
+                th.text-left(style="cursor: pointer")= playerData[0].pts
+                th.text-left(style="cursor: pointer")= playerData[0].fg_pct
+                th.text-left(style="cursor: pointer")= playerData[0].fg3_pct
+                th.text-left(style="cursor: pointer")= playerData[0].ft_pct
+                th.text-left(style="cursor: pointer")= playerData[0].ast
+                th.text-left(style="cursor: pointer")= playerData[0].reb
+                th.text-left(style="cursor: pointer")= playerData[0].oreb
+                th.text-left(style="cursor: pointer")= playerData[0].dreb
+                th.text-left(style="cursor: pointer")= playerData[0].stl
+                th.text-left(style="cursor: pointer")= playerData[0].tov
+                th.text-left(style="cursor: pointer")= playerData[0].pf
+            tbody
+              each val, index in playerData
+                tr
+                if (index !== 0)
+                  td 
+                    img.player-pic(src=val.pic)
+                  td.text-center= val.player
+                  td.text-center= val.num
+                  td.text-center= val.pos
+                  td.text-left= val.gp
+                  td.text-left= val.pts 
+                  td.text-left= val.fg_pct
+                  td.text-left= val.fg3_pct
+                  td.text-left= val.ft_pct
+                  td.text-left= val.ast 
+                  td.text-left= val.reb 
+                  td.text-left= val.oreb 
+                  td.text-left= val.dreb
+                  td.text-left= val.stl 
+                  td.text-left= val.tov 
+                  td.text-left= val.pf
               
 style.  
   .player-pic {
