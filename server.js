@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const orderBy = require('lodash.orderby');
 const nbaService = require('./services/nba.service');
 const ncaaService = require('./services/ncaa.service');
 const teamService = require('./services/teams.service');
@@ -22,8 +23,9 @@ app.get('/ncaa/', (req, res) => {
   let team = req.params.ncaa;
   let url = 'http://espn.go.com/mens-college-basketball/teams';
   ncaaService.getNCAAIDs(url, (schoolData) => {
+    let orderedSchoolData = orderBy(schoolData, ['teamName'], ['asc']);
     res.render('includes/ncaa', {
-      schoolData: schoolData
+      schoolData: orderedSchoolData
     });
   });
 });
