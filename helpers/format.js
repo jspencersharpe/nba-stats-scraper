@@ -15,7 +15,6 @@ exports.formatStat = (data) => {
     if (value.tov === "") value.tov = "-";
     if (value.pf === "") value.pf = "-";
   });
-
   return data;
 }
 
@@ -44,4 +43,23 @@ exports.formatTeamData = (data) => {
   });
 
   return data;
+}
+
+exports.formatSchoolList = (data) => {
+  for (let school of data) {
+    let name = school.teamName.split('-');
+    school.teamName = formatStrings(name).join(' ');
+  }
+  return data;
+}
+
+formatStrings = (team) => {
+  for (let i = 0; i < team.length; i++) {
+    if (team[i] === '%26') { team[i] = '&'; }
+    if (team[i] === 'a%26m') { team[i] = 'A&M'; }
+    if (team[i] === 'jos%C3%A9') { team[i] = 'Jose'; }
+    if (team[i] === 'a%26t') { team[i] = 'A&T'; }
+    team[i] = team[i].charAt(0).toUpperCase() + team[i].slice(1);
+  }
+  return team;
 }
