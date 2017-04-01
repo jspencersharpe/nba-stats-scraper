@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
     res.render('index', {
       teamsList: teamsList
     });
-  })
+  });
 });
 
 app.get('/ncaa/', (req, res) => {
@@ -25,7 +25,7 @@ app.get('/ncaa/', (req, res) => {
   ncaaService.getNCAAIDs(url, (schoolData) => {
     let orderedSchoolData = orderBy(schoolData, ['teamName'], ['asc']);
     res.render('includes/ncaa', {
-      schoolData: orderedSchoolData
+      schoolData: format.formatSchoolList(orderedSchoolData)
     });
   });
 });
