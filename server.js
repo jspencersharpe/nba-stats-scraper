@@ -11,48 +11,50 @@ app.set('view engine', 'jade');
 
 app.get('/', (req, res) => {
   let url = 'http://www.nba.com/teams';
-  teamService.getTeamList(url, (teamData) => {
-    let teamsList = format.formatTeamData(teamData);
-    res.render('index', {
-      teamsList: teamsList
-    });
-  });
+  teamService.getTeamList(url)
+    .then(response => {
+      let teamsList = format.formatTeamData(response);
+      res.render('index', {
+        teamsList: teamsList
+      });
+    }).catch(err => {
+      res.render('404', {});
+    });;
 });
 
 app.get('/ncaa/', (req, res) => {
   let team = req.params.ncaa;
   let url = 'http://espn.go.com/mens-college-basketball/teams';
-  ncaaService.getNCAAIDs(url, (schoolData) => {
-    let orderedSchoolData = orderBy(schoolData, ['teamName'], ['asc']);
-    res.render('includes/ncaa', {
-      schoolData: format.formatSchoolList(orderedSchoolData)
+  ncaaService.getNCAAIDs(url)
+    .then(response => {
+      let orderedSchoolData = orderBy(response, ['teamName'], ['asc']);
+      res.render('includes/ncaa', {
+        schoolData: format.formatSchoolList(orderedSchoolData)
+      });
+    }).catch(err => {
+      res.render('404', {});
     });
-  });
 });
 
 app.get('/:team', (req, res) => {
-  let route = '';
-
   let team = req.params.team;
   let url = 'http://www.nba.com/' + team + '/stats';
   if (team == 'mavericks') {
-    route = 'includes/mavs';
+    res.render('includes/mavs');
   }
 
-  nbaService.getNBAData(url, (jsonData) => {
-    let data = {};
-    if (jsonData.playerData.length === 0 || jsonData.teamData.length === 0) {
-      route = '404';
-    } else {
-      let playerData = format.formatStat(jsonData.playerData);
-      let teamData = jsonData.teamData;
-      data.playerData = playerData;
-      data.team = format.formatTeamName(url);
-      data.teamData = teamData;
-      route = 'includes/stats';
-    }
-    res.render(route, data);
-  });
+  nbaService.getNBAData(url)
+    .then(response => {
+      let playerData = format.formatStat(response.playerData);
+      let teamData = response.teamData;
+      res.render('includes/stats', {
+        playerData: playerData,
+        team: format.formatTeamName(url),
+        teamData: teamData
+      })
+    }).catch(err => {
+      res.render('404', {});
+    });
 });
 
 app.get('/player/:playerId', (req, res) => {
