@@ -11,7 +11,7 @@ exports.getNBAData = (url, callback) => {
       self.playerInfo = [];
       self.teamInfo = [];
       self.imagesArr = [];
-      self.linkArr = [];
+      self.idArr = [];
       $('#logo').each(function(index, value) {
         let img = $('img');
         let teamLogo = img[0].attribs.src;
@@ -20,7 +20,7 @@ exports.getNBAData = (url, callback) => {
         };
       });
       $('.stats-table.season-averages tr').each(function(index, value) {
-        let player = $('.playerName', this).text(),
+        let name = $('.playerName', this).text(),
           playerLink = $('.playerName a'),
           playerImg = $('.player-name__inner-wrapper img'),
           num = $('.playerNumber', this).text(),
@@ -37,10 +37,10 @@ exports.getNBAData = (url, callback) => {
           stl = $('.stl', this).text(),
           tov = $('.tov', this).text(),
           pf = $('.pf', this).text();
-        self.linkArr.push(playerLink[index].attribs.href);
+        self.idArr.push(playerLink[index].attribs.href);
         self.imagesArr.push(playerImg[index].attribs.src);
         let data = {
-          player: player,
+          name: name,
           gp: gp,
           num: num,
           pos: pos,
@@ -59,10 +59,14 @@ exports.getNBAData = (url, callback) => {
         self.playerInfo.push(data);
       });
       self.imagesArr.unshift('');
-      self.linkArr.unshift('');
+      self.idArr.unshift('');
+      let idArr = self.idArr.map((x) => {
+        let splt = x.split('/');
+        return splt[4];
+      });
       self.playerInfo.forEach((value, index) => {
         value.pic = self.imagesArr[index];
-        value.link = self.linkArr[index];
+        value.playerId = idArr[index];
         return value;
       });
       let teamData = {
@@ -70,6 +74,52 @@ exports.getNBAData = (url, callback) => {
         teamData: self.teamInfo
       }
       return callback(teamData);
+    }
+  });
+}
+
+exports.getPlayerData = (url, callback) => {
+  let self = this;
+  request(url, (error, response, html) => {
+    if (!error) {
+      let $ = cheerio.load(html);
+      let data = [];
+      let playerObj = {};
+      let seasonStats = null;
+      let careerStats = null;
+      $('.nba-player-season-career-stats table tbody').each(function(index, value) {
+        let season = $('tr:first-child', this).text();
+        let career = $('tr:nth-child(2)', this).text();
+        let seasSplt = season.split(' ');
+        let carSplt = season.split(' ');
+        let filteredSeason = seasSplt.filter(i => i !== '' && i !== '\n');
+        let filteredCareer = carSplt.filter(i => i !== '' && i !== '\n');
+        seasonStats = filteredSeason.map(i => {
+          return i.split('\n')[0];
+        });
+        careerStats = filteredCareer.map(i => {
+          return i.split('\n')[0];
+        });
+      });
+      $('.nba-player-header__headshot img').each(function(index, value) {
+        playerObj.name = value.attribs.alt;
+        playerObj.img = value.attribs.src;
+      });
+      $('.nba-player-vitals').each(function(index, value) {
+        let res = $('span', this).text();
+        data.push(res);
+      });
+      playerObj.seasonStats = { mpg: seasonStats[1], fg: seasonStats[2],
+        tp: seasonStats[3], ft: seasonStats[4], ppg: seasonStats[5],
+        rpg: seasonStats[6], apg: seasonStats[7], bpg: seasonStats[8]
+      };
+      playerObj.careerStats = {mpg: careerStats[1], fg: careerStats[2],
+        tp: careerStats[3], ft: careerStats[4], ppg: careerStats[5],
+        rpg: careerStats[6], apg: careerStats[7], bpg: careerStats[8]
+      };
+      let rawInfo = data[0].split('\n');
+      playerObj.rawInfo = rawInfo;
+      return callback(playerObj);
     }
   });
 }

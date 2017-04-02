@@ -45,7 +45,18 @@ app.get('/:team', (req, res) => {
       playerData: playerData,
       team: format.formatTeamName(url),
       teamData: teamData
-    })
+    });
+  });
+});
+
+app.get('/player/:playerId', (req, res) => {
+  let playerId = req.params.playerId;
+  let url = 'http://www.nba.com/playerfile/' + playerId;
+
+  nbaService.getPlayerData(url, (jsonData) => {
+    let playerObj = jsonData;
+    playerObj.data = format.formatPlayerData(jsonData.rawInfo);
+    res.render('includes/player', {playerObj});
   });
 });
 
