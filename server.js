@@ -31,21 +31,27 @@ app.get('/ncaa/', (req, res) => {
 });
 
 app.get('/:team', (req, res) => {
+  let route = '';
+
   let team = req.params.team;
   let url = 'http://www.nba.com/' + team + '/stats';
   if (team == 'mavericks') {
-    res.render('includes/mavs');
-    return;
+    route = 'includes/mavs';
   }
 
   nbaService.getNBAData(url, (jsonData) => {
-    let playerData = format.formatStat(jsonData.playerData);
-    let teamData = jsonData.teamData;
-    res.render('includes/stats', {
-      playerData: playerData,
-      team: format.formatTeamName(url),
-      teamData: teamData
-    });
+    let data = {};
+    if (jsonData.playerData.length === 0 || jsonData.teamData.length === 0) {
+      route = '404';
+    } else {
+      let playerData = format.formatStat(jsonData.playerData);
+      let teamData = jsonData.teamData;
+      data.playerData = playerData;
+      data.team = format.formatTeamName(url);
+      data.teamData = teamData;
+      route = 'includes/stats';
+    }
+    res.render(route, data);
   });
 });
 
@@ -53,11 +59,15 @@ app.get('/player/:playerId', (req, res) => {
   let playerId = req.params.playerId;
   let url = 'http://www.nba.com/playerfile/' + playerId;
 
-  nbaService.getPlayerData(url, (jsonData) => {
-    let playerObj = jsonData;
-    playerObj.data = format.formatPlayerData(jsonData.rawInfo);
-    res.render('includes/player', {playerObj});
-  });
+  nbaService.getPlayerData(url)
+    .then(response => {
+      let playerObj = response;
+      playerObj.data = format.formatPlayerData(playerObj.rawInfo);
+      delete playerObj.rawInfo;
+      res.render('includes/player', {playerObj});
+    }).catch(err => {
+      res.render('404', {});
+    });
 });
 
 app.listen(process.env.PORT || 3333)
