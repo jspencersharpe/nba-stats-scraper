@@ -91,7 +91,7 @@ exports.getPlayerData = (url, callback) => {
         let season = $('tr:first-child', this).text();
         let career = $('tr:nth-child(2)', this).text();
         let seasSplt = season.split(' ');
-        let carSplt = season.split(' ');
+        let carSplt = career.split(' ');
         let filteredSeason = seasSplt.filter(i => i !== '' && i !== '\n');
         let filteredCareer = carSplt.filter(i => i !== '' && i !== '\n');
         seasonStats = filteredSeason.map(i => {
@@ -113,9 +113,9 @@ exports.getPlayerData = (url, callback) => {
         tp: seasonStats[3], ft: seasonStats[4], ppg: seasonStats[5],
         rpg: seasonStats[6], apg: seasonStats[7], bpg: seasonStats[8]
       };
-      playerObj.careerStats = {mpg: careerStats[1], fg: careerStats[2],
-        tp: careerStats[3], ft: careerStats[4], ppg: careerStats[5],
-        rpg: careerStats[6], apg: careerStats[7], bpg: careerStats[8]
+      playerObj.careerStats = {mpg: careerStats[2], fg: careerStats[3],
+        tp: careerStats[4], ft: careerStats[5], ppg: careerStats[6],
+        rpg: careerStats[7], apg: careerStats[8], bpg: careerStats[9]
       };
       let rawInfo = data[0].split('\n');
       playerObj.rawInfo = rawInfo;
