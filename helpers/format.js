@@ -45,6 +45,26 @@ exports.formatTeamData = (data) => {
   return data;
 }
 
+exports.formatPlayerData = (data) => {
+  let arr = [];
+  for (let item of data) {
+    let split = item.split(' ');
+    arr.push(...split);
+  }
+  let filtered = arr.filter(i => i !== '');
+  let inches = filtered[1].split('in');
+  let weight = filtered[2].split('in');
+  let inch = inches[0].split('ft')
+  let height = `${filtered[0]}ft, ${inch[1]}in`;
+
+  return {
+    height: height,
+    weight: weight[1],
+    dob: filtered[4],
+    age: filtered[6]
+  }
+}
+
 exports.formatSchoolList = (data) => {
   for (let school of data) {
     let name = school.teamName.split('-');

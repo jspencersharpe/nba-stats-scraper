@@ -37,27 +37,27 @@ html
                 th.text-left(style="cursor: pointer")= playerData[0].tov
                 th.text-left(style="cursor: pointer")= playerData[0].pf
             tbody
-              each val, index in playerData
+              each player, index in playerData
                 tr
                 if (index !== 0)
                   td 
-                    img.player-pic(src=val.pic)
+                    img.player-pic(src=player.pic)
                   td.text-center
-                    a(href=val.link, target='_blank')= val.player
-                  td.text-center= val.num
-                  td.text-center= val.pos
-                  td.text-left= val.gp
-                  td.text-left= val.pts 
-                  td.text-left= val.fg_pct
-                  td.text-left= val.fg3_pct
-                  td.text-left= val.ft_pct
-                  td.text-left= val.ast 
-                  td.text-left= val.reb 
-                  td.text-left= val.oreb 
-                  td.text-left= val.dreb
-                  td.text-left= val.stl 
-                  td.text-left= val.tov 
-                  td.text-left= val.pf
+                    a(href="/player/" + player.playerId)= player.name
+                  td.text-center= player.num
+                  td.text-center= player.pos
+                  td.text-left= player.gp
+                  td.text-left= player.pts 
+                  td.text-left= player.fg_pct
+                  td.text-left= player.fg3_pct
+                  td.text-left= player.ft_pct
+                  td.text-left= player.ast 
+                  td.text-left= player.reb 
+                  td.text-left= player.oreb 
+                  td.text-left= player.dreb
+                  td.text-left= player.stl 
+                  td.text-left= player.tov 
+                  td.text-left= player.pf
               
 style.  
   .player-pic {

@@ -1,0 +1,72 @@
+html
+  head
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous")
+    link(rel="stylesheet", href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+  body 
+    .container-fluid
+      .row.mb-4.mt-2
+        .col-12
+          a(href='/')
+            i.fa.fa-arrow-left
+            |  Back to all teams
+      .row 
+        .col-12 
+          h1= playerObj.name
+      .row 
+        .col-md-4
+          img(src=playerObj.img)
+        .col-md-8
+          table.table 
+            tbody 
+              thead 
+                tr 
+                  th
+                  th MPG
+                  th FG%
+                  th 3P%
+                  th FT%
+                  th PPG
+                  th RPG 
+                  th APG 
+                  th BPG  
+              tr
+                th SEASON
+                td= playerObj.seasonStats.mpg
+                td= playerObj.seasonStats.fg
+                td= playerObj.seasonStats.tp
+                td= playerObj.seasonStats.ft
+                td= playerObj.seasonStats.ppg
+                td= playerObj.seasonStats.rpg
+                td= playerObj.seasonStats.apg
+                td= playerObj.seasonStats.bpg
+              tr
+                th CAREER 
+                td= playerObj.careerStats.mpg
+                td= playerObj.careerStats.fg
+                td= playerObj.careerStats.tp
+                td= playerObj.careerStats.ft
+                td= playerObj.careerStats.ppg
+                td= playerObj.careerStats.rpg
+                td= playerObj.careerStats.apg
+                td= playerObj.careerStats.bpg        
+      .row 
+        .col-md-4
+          .row
+            .col-md-6
+              span.text-muted.w-100 Height
+              h4= playerObj.data.height 
+            .col-md-6.text-right
+              span.text-muted.w-100 Weight
+              h4= playerObj.data.weight      
+                | lbs  
+          .row 
+            .col-4.text-left
+              span.text-muted BORN
+            .col-8.text-right 
+              span.text-muted= playerObj.data.dob 
+          .row 
+            .col-4.text-left
+              span.text-muted AGE
+            .col-8.text-right 
+              span.text-muted= playerObj.data.age 
+                |  years old
