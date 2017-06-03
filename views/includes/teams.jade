@@ -2,7 +2,7 @@
   .album
     .row
       each team in teamsList
-        .col-md-3.text-center
+        .team.col-lg-3.col-md-6.text-center
           a(href=team.route)
             img.rounded-circle(src=team.url, class=team.className)
           h3= team.name
@@ -18,3 +18,44 @@ style.
   .nba-team {
     max-width: 150px;
   }
+
+  .background {
+    background-color: #006BB6;
+    z-index: -1;
+  }
+
+  .fa-spinner {
+    color: white;
+  }
+
+  .loading {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    transform: translate(0, 100%)
+  }
+
+  .hidden {
+    visibility: hidden;
+  }
+
+  h3 {
+    color: #072840;
+  }
+
+  .btn-secondary {
+    color: #072840;
+  }
+
+script.
+  var $team = $('.team');
+  var $loading = $('.loading');
+  var $body = $('body');
+  var $nav = $('nav');
+
+  $team.on('click', function() {
+    $team.hide();
+    $nav.hide();
+    $body.addClass('background');
+    $loading.removeClass('hidden');
+  });
