@@ -7,21 +7,23 @@ html
     script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.28.3/js/jquery.tablesorter.min.js")
 
   body
+    nav.navbar
+      h2 NBA Stats
     .container-fluid
       .row.mb-4.mt-2
         .col-12
           a(href='/')
             i.fa.fa-arrow-left
             |  Back to all teams
-      .row 
+      .row
         .col-12
           img(src=teamData.teamLogo)
           h1= team
           table#stats-table.table.table-hover.tablesorter
-            thead 
-              tr 
+            thead
+              tr
               if(playerData[0])
-                th 
+                th
                 th.text-center(style="cursor: pointer") Name
                 th.text-center(style="cursor: pointer") Number
                 th.text-center(style="cursor: pointer") Position
@@ -41,32 +43,74 @@ html
               each player, index in playerData
                 tr
                 if (index !== 0)
-                  td 
+                  td
                     img.player-pic(src=player.pic)
                   td.text-center
                     a(href="/player/" + player.playerId)= player.name
                   td.text-center= player.num
                   td.text-center= player.pos
                   td.text-left= player.gp
-                  td.text-left= player.pts 
+                  td.text-left= player.pts
                   td.text-left= player.fg_pct
                   td.text-left= player.fg3_pct
                   td.text-left= player.ft_pct
-                  td.text-left= player.ast 
-                  td.text-left= player.reb 
-                  td.text-left= player.oreb 
+                  td.text-left= player.ast
+                  td.text-left= player.reb
+                  td.text-left= player.oreb
                   td.text-left= player.dreb
-                  td.text-left= player.stl 
-                  td.text-left= player.tov 
+                  td.text-left= player.stl
+                  td.text-left= player.tov
                   td.text-left= player.pf
-              
-style.  
+
+style.
   .player-pic {
     max-height: 100px;
   }
-  
+
+  .navbar {
+    background-color: #006BB6;
+    color: white;
+  }
+
+  .background {
+    z-index: -1;
+    background-color: #006BB6;
+  }
+
+  .fa-spinner {
+    color: white;
+  }
+
+  .loading {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    transform: translate(0, 100%)
+  }
+
+  .hidden {
+    visibility: hidden;
+  }
+
+  h1, th, td {
+    color: #072840;
+  }
+
 script.
+  var $link = $('a');
+  var $loading = $('.loading');
+  var $body = $('body');
+  var $container = $('.container-fluid')
+  var $nav = $('nav');
+
   $(document).ready(function() {
     $("#stats-table").tablesorter();
     $("#stats-table").tablesorter( {sortList: [[0,0], [1,0]]} );
+  });
+
+  $link.on('click', function() {
+    $nav.hide();
+    $container.hide();
+    $body.addClass('background');
+    $loading.removeClass('hidden');
   });

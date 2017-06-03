@@ -3,33 +3,35 @@ html
     meta(name="viewport", content="width=device-width, initial-scale=1")
     link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous")
     link(rel="stylesheet", href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
-  body 
+  body
+    nav.navbar
+      h2 NBA Stats
     .container-fluid
       .row.mb-4.mt-2
         .col-12
           a(href='/')
             i.fa.fa-arrow-left
             |  Back to all teams
-      .row 
-        .col-12 
+      .row
+        .col-12
           h1= playerObj.name
-      .row 
+      .row
         .col-md-4
           img(src=playerObj.img)
         .col-md-8
-          table.table 
-            tbody 
-              thead 
-                tr 
+          table.table
+            tbody
+              thead
+                tr
                   th
                   th MPG
                   th FG%
                   th 3P%
                   th FT%
                   th PPG
-                  th RPG 
-                  th APG 
-                  th BPG  
+                  th RPG
+                  th APG
+                  th BPG
               tr
                 th SEASON
                 td= playerObj.seasonStats.mpg
@@ -41,7 +43,7 @@ html
                 td= playerObj.seasonStats.apg
                 td= playerObj.seasonStats.bpg
               tr
-                th CAREER 
+                th CAREER
                 td= playerObj.careerStats.mpg
                 td= playerObj.careerStats.fg
                 td= playerObj.careerStats.tp
@@ -49,25 +51,35 @@ html
                 td= playerObj.careerStats.ppg
                 td= playerObj.careerStats.rpg
                 td= playerObj.careerStats.apg
-                td= playerObj.careerStats.bpg        
-      .row 
+                td= playerObj.careerStats.bpg
+      .row
         .col-md-4
           .row
             .col-md-6
               .text-muted Height
-              h4= playerObj.data.height 
+              h4= playerObj.data.height
             .col-md-6
               .text-muted Weight
-              h4= playerObj.data.weight      
-                | lbs  
-          .row 
+              h4= playerObj.data.weight
+                | lbs
+          .row
             .col-4.text-left
               span.text-muted BORN
-            .col-8.text-right 
-              span.text-muted= playerObj.data.dob 
-          .row 
+            .col-8.text-right
+              span.text-muted= playerObj.data.dob
+          .row
             .col-4.text-left
               span.text-muted AGE
-            .col-8.text-right 
-              span.text-muted= playerObj.data.age 
+            .col-8.text-right
+              span.text-muted= playerObj.data.age
                 |  years old
+
+style.
+  .navbar {
+    background-color: #006BB6;
+    color: white;
+  }
+
+  h1, h4, th, td {
+    color: #072840;
+  }
