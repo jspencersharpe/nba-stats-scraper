@@ -28,7 +28,7 @@ app.get('/ncaa/', (req, res) => {
   ncaaService.getNCAAIDs(url)
     .then(response => {
       let orderedSchoolData = orderBy(response, ['teamName'], ['asc']);
-      res.render('includes/ncaa', {
+      res.render('ncaa', {
         schoolData: format.formatSchoolList(orderedSchoolData)
       });
     }).catch(err => {
@@ -40,14 +40,14 @@ app.get('/:team', (req, res) => {
   let team = req.params.team;
   let url = 'http://www.nba.com/' + team + '/stats';
   if (team == 'mavericks') {
-    res.render('includes/mavs');
+    res.render('mavs');
   }
 
   nbaService.getNBAData(url)
     .then(response => {
       let playerData = format.formatStat(response.playerData);
       let teamData = response.teamData;
-      res.render('includes/stats', {
+      res.render('stats', {
         playerData: playerData,
         team: format.formatTeamName(url),
         teamData: teamData
@@ -66,7 +66,7 @@ app.get('/player/:playerId', (req, res) => {
       let playerObj = response;
       playerObj.data = format.formatPlayerData(playerObj.rawInfo);
       delete playerObj.rawInfo;
-      res.render('includes/player', {playerObj});
+      res.render('player', {playerObj});
     }).catch(err => {
       res.render('404', {});
     });
