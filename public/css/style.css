@@ -43,3 +43,12 @@ h1, h3, th, td {
 .player-pic {
   max-height: 100px;
 }
+
+#back {
+  color: #006BB6;
+  cursor: pointer;
+}
+
+#back:hover {
+  text-decoration: underline;
+}
