@@ -4,8 +4,9 @@ html
     link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous")
     link(rel="stylesheet", href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
     link(rel="stylesheet", type="text/css", href="css/style.css")
-    script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js")
-    script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.28.3/js/jquery.tablesorter.min.js")
+    script(type="text/javascript", src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js")
+    script(type="text/javascript", src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.28.3/js/jquery.tablesorter.min.js")
+    script(type="text/javascript", src="js/main.js")
 
   body
     nav.navbar
@@ -64,20 +65,7 @@ html
                   td.text-left= player.pf
 
 script.
-  var $link = $('a');
-  var $loading = $('.loading');
-  var $body = $('body');
-  var $container = $('.container-fluid')
-  var $nav = $('nav');
-
   $(document).ready(function() {
     $("#stats-table").tablesorter();
     $("#stats-table").tablesorter( {sortList: [[0,0], [1,0]]} );
-  });
-
-  $link.on('click', function() {
-    $nav.hide();
-    $container.hide();
-    $body.addClass('background');
-    $loading.removeClass('hidden');
   });

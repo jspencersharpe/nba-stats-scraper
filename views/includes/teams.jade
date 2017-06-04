@@ -8,16 +8,3 @@
           h3= team.name
           a.btn.btn-secondary(href=team.route)= team.btnText
             |  »
-
-script.
-  var $team = $('.team');
-  var $loading = $('.loading');
-  var $body = $('body');
-  var $nav = $('nav');
-
-  $team.on('click', function() {
-    $team.hide();
-    $nav.hide();
-    $body.addClass('background');
-    $loading.removeClass('hidden');
-  });
