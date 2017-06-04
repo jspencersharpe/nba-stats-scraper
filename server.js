@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const orderBy = require('lodash.orderby');
+const _ = require('lodash');
 const nbaService = require('./services/nba.service');
 const ncaaService = require('./services/ncaa.service');
 const teamService = require('./services/teams.service');
@@ -28,7 +28,7 @@ app.get('/ncaa/', (req, res) => {
   let url = 'http://espn.go.com/mens-college-basketball/teams';
   ncaaService.getNCAAIDs(url)
     .then(response => {
-      let orderedSchoolData = orderBy(response, ['teamName'], ['asc']);
+      let orderedSchoolData = _.orderBy(response, ['teamName'], ['asc']);
       res.render('ncaa', {
         schoolData: format.formatSchoolList(orderedSchoolData)
       });
@@ -65,8 +65,10 @@ app.get('/player/:playerId', (req, res) => {
   nbaService.getPlayerData(url)
     .then(response => {
       let playerObj = response;
+      playerObj.bio = _.compact(playerObj.bioList);
       playerObj.data = format.formatPlayerData(playerObj.rawInfo);
       delete playerObj.rawInfo;
+      delete playerObj.bioList;
       res.render('player', {playerObj});
     }).catch(err => {
       res.render('404', {});

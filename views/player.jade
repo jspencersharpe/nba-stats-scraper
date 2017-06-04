@@ -21,9 +21,32 @@ html
         .col-12
           h1= playerObj.name
       .row
-        .col-md-4
+        .col-md-3
           img(src=playerObj.img)
-        .col-md-8
+          .d-flex.align-items-center.justify-content-between.pt-2
+            .text-left
+              .text-muted Height
+              h4= playerObj.data.height
+            .text-left
+              .text-muted Weight
+              h4= playerObj.data.weight
+                | lbs
+          .d-flex.align-items-center.justify-content-between.mt-2
+            .text-left
+              span.text-muted BORN
+            .text-right
+              span.text-muted= playerObj.data.dob
+          .d-flex.align-items-center.justify-content-between
+            .text-left
+              span.text-muted AGE
+            .text-right
+              span.text-muted= playerObj.data.age
+                |  years old
+
+        .col-md-9
+          p.bio= playerObj.bio
+      .row.mt-4
+        .col-12
           table.table
             tbody
               thead
@@ -57,24 +80,3 @@ html
                 td= playerObj.careerStats.rpg
                 td= playerObj.careerStats.apg
                 td= playerObj.careerStats.bpg
-      .row
-        .col-md-4
-          .row
-            .col-md-6
-              .text-muted Height
-              h4= playerObj.data.height
-            .col-md-6
-              .text-muted Weight
-              h4= playerObj.data.weight
-                | lbs
-          .row
-            .col-4.text-left
-              span.text-muted BORN
-            .col-8.text-right
-              span.text-muted= playerObj.data.dob
-          .row
-            .col-4.text-left
-              span.text-muted AGE
-            .col-8.text-right
-              span.text-muted= playerObj.data.age
-                |  years old

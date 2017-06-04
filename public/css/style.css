@@ -44,6 +44,11 @@ h1, h3, th, td {
   max-height: 100px;
 }
 
+.bio {
+  max-height: 300px;
+  overflow: scroll;
+}
+
 #back {
   color: #006BB6;
   cursor: pointer;

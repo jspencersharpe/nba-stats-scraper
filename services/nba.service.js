@@ -76,6 +76,7 @@ exports.getPlayerData = (url) => {
         let playerObj = {};
         let seasonStats = null;
         let careerStats = null;
+        let bioList = [];
         $('.nba-player-season-career-stats table tbody').each(function(index, value) {
           let season = $('tr:first-child', this).text();
           let career = $('tr:nth-child(2)', this).text();
@@ -93,6 +94,13 @@ exports.getPlayerData = (url) => {
             return i.split('\n')[0];
           });
         });
+        $('.nba-player-detail__bio p br').each(function(index, value) {
+          let val = value.next;
+          if (val) {
+            bioList.push(val.data);
+          }
+        });
+        playerObj.bioList = bioList;
         $('.nba-player-header__headshot img').each(function(index, value) {
           playerObj.name = value.attribs.alt;
           playerObj.img = value.attribs.src;
