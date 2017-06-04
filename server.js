@@ -8,6 +8,7 @@ const teamService = require('./services/teams.service');
 const format = require('./helpers/format');
 
 app.set('view engine', 'jade');
+app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
   let url = 'http://www.nba.com/teams';
