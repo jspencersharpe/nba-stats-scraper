@@ -4,16 +4,17 @@ $(document).ready(function() {
   var $body = $('body');
   var $nav = $('nav');
   var $container = $('.container-fluid');
-  var $link = $('a');
   var $back = $('#back');
+  var $teamImg = $('.rounded-circle');
+  var $teamButton = $('#teamButton');
 
-  $team.on('click', function() {
+  $teamImg.on('click', function() {
     hideElements($team, $nav);
     toggleLoadingClass($body, $loading);
   });
 
-  $link.on('click', function() {
-    hideElements($nav, $container);
+  $teamButton.on('click', function() {
+    hideElements($team, $nav);
     toggleLoadingClass($body, $loading);
   });
 
