@@ -1,30 +1,31 @@
 var exports = module.exports = {};
 
 exports.formatStat = (data) => {
-  data.forEach((value, index) => {
-    if (value.gp === "") value.gp = "-";
-    if (value.pts === "") value.pts = "-";
-    if (value.fg_pct === "") value.fg_pct = "-";
-    if (value.fg3_pct === "") value.fg3_pct = "-";
-    if (value.ft_pct === "") value.ft_pct = "-";
-    if (value.ast === "") value.ast = "-";
-    if (value.reb === "") value.reb = "-";
-    if (value.oreb === "") value.oreb = "-";
-    if (value.dreb === "") value.dreb = "-";
-    if (value.stl === "") value.stl = "-";
-    if (value.tov === "") value.tov = "-";
-    if (value.pf === "") value.pf = "-";
+  data.forEach((value) => {
+    if (value.gp === '') { value.gp = '-'; }
+    if (value.pts === '') { value.pts = '-'; }
+    if (value.fg_pct === '') { value.fg_pct = '-'; }
+    if (value.fg3_pct === '') { value.fg3_pct = '-'; }
+    if (value.ft_pct === '') { value.ft_pct = '-'; }
+    if (value.ast === '') { value.ast = '-'; }
+    if (value.reb === '') { value.reb = '-'; }
+    if (value.oreb === '') { value.oreb = '-'; }
+    if (value.dreb === '') { value.dreb = '-'; }
+    if (value.stl === '') { value.stl = '-'; }
+    if (value.tov === '') { value.tov = '-'; }
+    if (value.pf === '') { value.pf = '-'; }
   });
+
   return data;
-}
+};
 
 exports.formatTeamName = (url) => {
   let newUrl = url.split('/');
   return newUrl[3].toUpperCase();
-}
+};
 
 exports.formatTeamData = (data) => {
-  data.forEach((value, index) => {
+  data.forEach((value) => {
     value.btnText = 'View Players';
     value.className = 'nba-team';
     if (value.name === 'Philadelphia 76ers') {
@@ -38,12 +39,11 @@ exports.formatTeamData = (data) => {
     route: 'ncaa',
     btnText: 'View Teams',
     className: 'ncaa',
-    url: 'https://pbs.twimg.com/profile_images/188987758/NCAA_primaryc.gif',
-    route: '/ncaa'
+    url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/NCAA_logo.svg/1200px-NCAA_logo.svg.png'
   });
 
   return data;
-}
+};
 
 exports.formatPlayerData = (data) => {
   let arr = [];
@@ -62,8 +62,8 @@ exports.formatPlayerData = (data) => {
     weight: weight[1],
     dob: filtered[4],
     age: filtered[6]
-  }
-}
+  };
+};
 
 exports.formatSchoolList = (data) => {
   for (let school of data) {
@@ -71,9 +71,9 @@ exports.formatSchoolList = (data) => {
     school.teamName = formatStrings(name).join(' ');
   }
   return data;
-}
+};
 
-formatStrings = (team) => {
+const formatStrings = (team) => {
   for (let i = 0; i < team.length; i++) {
     if (team[i] === '%26') { team[i] = '&'; }
     if (team[i] === 'a%26m') { team[i] = 'A&M'; }
@@ -82,4 +82,4 @@ formatStrings = (team) => {
     team[i] = team[i].charAt(0).toUpperCase() + team[i].slice(1);
   }
   return team;
-}
+};

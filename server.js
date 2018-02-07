@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const path = require('path');
 const _ = require('lodash');
 const nbaService = require('./services/nba.service');
 const ncaaService = require('./services/ncaa.service');
@@ -18,13 +17,12 @@ app.get('/', (req, res) => {
       res.render('index', {
         teamsList: teamsList
       });
-    }).catch(err => {
+    }).catch(() => {
       res.render('404', {});
-    });;
+    });
 });
 
 app.get('/ncaa/', (req, res) => {
-  let team = req.params.ncaa;
   let url = 'http://espn.go.com/mens-college-basketball/teams';
   ncaaService.getNCAAIDs(url)
     .then(response => {
@@ -32,7 +30,7 @@ app.get('/ncaa/', (req, res) => {
       res.render('ncaa', {
         schoolData: format.formatSchoolList(orderedSchoolData)
       });
-    }).catch(err => {
+    }).catch(() => {
       res.render('404', {});
     });
 });
@@ -40,7 +38,7 @@ app.get('/ncaa/', (req, res) => {
 app.get('/:team', (req, res) => {
   let team = req.params.team;
   let url = 'http://www.nba.com/' + team + '/stats';
-  if (team == 'mavericks') {
+  if (team === 'mavericks') {
     res.render('mavs');
   }
 
@@ -52,8 +50,8 @@ app.get('/:team', (req, res) => {
         playerData: playerData,
         team: format.formatTeamName(url),
         teamData: teamData
-      })
-    }).catch(err => {
+      });
+    }).catch(() => {
       res.render('404', {});
     });
 });
@@ -70,11 +68,11 @@ app.get('/player/:playerId', (req, res) => {
       delete playerObj.rawInfo;
       delete playerObj.bioList;
       res.render('player', {playerObj});
-    }).catch(err => {
+    }).catch(() => {
       res.render('404', {});
     });
 });
 
-app.listen(process.env.PORT || 3333)
+app.listen(process.env.PORT || 3333);
 console.log('Running on 3333');
 exports = module.exports = app;

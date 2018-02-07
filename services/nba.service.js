@@ -1,12 +1,12 @@
 const request = require('request');
-var Promise = require("promise");
+var Promise = require('promise');
 const cheerio = require('cheerio');
 
 var exports = module.exports = {};
 
 exports.getNBAData = (url) => {
   let self = this;
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     request(url, (error, response, html) => {
       if (!error) {
         let $ = cheerio.load(html);
@@ -14,14 +14,14 @@ exports.getNBAData = (url) => {
         self.teamInfo = [];
         self.imagesArr = [];
         self.idArr = [];
-        $('#logo').each(function(index, value) {
+        $('#logo').each(function() {
           let img = $('img');
           let teamLogo = img[0].attribs.src;
           self.teamInfo = {
             teamLogo: teamLogo
           };
         });
-        $('.stats-table.season-averages tr').each(function(index, value) {
+        $('.stats-table.season-averages tr').each(function(index) {
           let playerLink = $('.playerName a');
           let playerImg = $('.player-name__inner-wrapper img');
           self.idArr.push(playerLink[index].attribs.href);
@@ -67,8 +67,7 @@ exports.getNBAData = (url) => {
 }
 
 exports.getPlayerData = (url) => {
-  return new Promise((resolve, reject) => {
-    let self = this;
+  return new Promise((resolve) => {
     request(url, (error, response, html) => {
       if (!error) {
         let $ = cheerio.load(html);
@@ -77,7 +76,7 @@ exports.getPlayerData = (url) => {
         let seasonStats = null;
         let careerStats = null;
         let bioList = [];
-        $('.nba-player-season-career-stats table tbody').each(function(index, value) {
+        $('.nba-player-season-career-stats table tbody').each(function() {
           let season = $('tr:first-child', this).text();
           let career = $('tr:nth-child(2)', this).text();
           let seasSplt = season.split(' ');
@@ -105,7 +104,7 @@ exports.getPlayerData = (url) => {
           playerObj.name = value.attribs.alt;
           playerObj.img = value.attribs.src;
         });
-        $('.nba-player-vitals').each(function(index, value) {
+        $('.nba-player-vitals').each(function() {
           let res = $('span', this).text();
           data.push(res);
         });
@@ -141,4 +140,4 @@ exports.getPlayerData = (url) => {
       }
     });
   });
-}
+};
