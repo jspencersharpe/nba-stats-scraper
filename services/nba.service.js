@@ -59,12 +59,12 @@ exports.getNBAData = (url) => {
         let teamData = {
           playerData: self.playerInfo,
           teamData: self.teamInfo
-        }
+        };
         resolve(teamData);
       }
     });
   });
-}
+};
 
 exports.getPlayerData = (url) => {
   return new Promise((resolve) => {

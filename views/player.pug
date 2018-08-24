@@ -60,6 +60,7 @@ html
                   th RPG
                   th APG
                   th BPG
+            if (playerObj.seasonStats)
               tr
                 th SEASON
                 td= playerObj.seasonStats.mpg
@@ -70,6 +71,7 @@ html
                 td= playerObj.seasonStats.rpg
                 td= playerObj.seasonStats.apg
                 td= playerObj.seasonStats.bpg
+            if (playerObj.careerStats)
               tr
                 th CAREER
                 td= playerObj.careerStats.mpg

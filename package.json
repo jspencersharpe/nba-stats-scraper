@@ -6,16 +6,17 @@
   "author": "Scotch",
   "dependencies": {
     "cheerio": "latest",
-    "express": "latest",
-    "jade": "^1.11.0",
-    "lodash": "4.17.4",
-    "request": "latest"
+    "express": "4.16.3",
+    "lodash": "4.17.10",
+    "promise": "^8.0.1",
+    "pug": "2.0.3",
+    "request": "2.88.0"
   },
   "scripts": {
     "start": "node server.js"
   },
   "engines": {
-    "node": "7.7.1"
+    "node": "9.11.1"
   },
   "devDependencies": {},
   "repository": {
