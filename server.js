@@ -10,7 +10,7 @@ app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
-  let url = 'http://www.nba.com/teams';
+  let url = 'https://www.nba.com/teams';
   teamService.getTeamList(url)
     .then(response => {
       let teamsList = format.formatTeamData(response);
@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/ncaa/', (req, res) => {
-  let url = 'http://espn.go.com/mens-college-basketball/teams';
+  let url = 'https://espn.go.com/mens-college-basketball/teams';
   ncaaService.getNCAAIDs(url)
     .then(response => {
       let orderedSchoolData = _.orderBy(response, ['teamName'], ['asc']);
@@ -37,7 +37,7 @@ app.get('/ncaa/', (req, res) => {
 
 app.get('/:team', (req, res) => {
   let team = req.params.team;
-  let url = 'http://www.nba.com/' + team + '/stats';
+  let url = 'https://www.nba.com/' + team + '/stats';
   if (team === 'mavericks') {
     res.render('mavs');
   }
@@ -58,7 +58,7 @@ app.get('/:team', (req, res) => {
 
 app.get('/player/:playerId', (req, res) => {
   let playerId = req.params.playerId;
-  let url = 'http://www.nba.com/playerfile/' + playerId;
+  let url = 'https://www.nba.com/playerfile/' + playerId;
 
   nbaService.getPlayerData(url)
     .then(response => {
