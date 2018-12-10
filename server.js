@@ -1,19 +1,20 @@
-const express = require('express');
+import express from 'express';
+import _ from 'lodash';
+import { getNCAAIDs } from './services/ncaa.service';
+import { getTeamList } from './services/teams.service';
+import { formatStat, formatSchoolList, formatTeamData, formatTeamName, formatPlayerData } from './helpers/format';
+import { getNBAData, getPlayerData } from './services/nba.service';
+
 const app = express();
-const _ = require('lodash');
-const nbaService = require('./services/nba.service');
-const ncaaService = require('./services/ncaa.service');
-const teamService = require('./services/teams.service');
-const format = require('./helpers/format');
 
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
   let url = 'https://www.nba.com/teams';
-  teamService.getTeamList(url)
+  getTeamList(url)
     .then(response => {
-      let teamsList = format.formatTeamData(response);
+      let teamsList = formatTeamData(response);
       res.render('index', {
         teamsList: teamsList
       });
@@ -24,11 +25,11 @@ app.get('/', (req, res) => {
 
 app.get('/ncaa/', (req, res) => {
   let url = 'https://espn.go.com/mens-college-basketball/teams';
-  ncaaService.getNCAAIDs(url)
+  getNCAAIDs(url)
     .then(response => {
       let orderedSchoolData = _.orderBy(response, ['teamName'], ['asc']);
       res.render('ncaa', {
-        schoolData: format.formatSchoolList(orderedSchoolData)
+        schoolData: formatSchoolList(orderedSchoolData)
       });
     }).catch(() => {
       res.render('404', {});
@@ -42,13 +43,13 @@ app.get('/:team', (req, res) => {
     res.render('mavs');
   }
 
-  nbaService.getNBAData(url)
+  getNBAData(url)
     .then(response => {
-      let playerData = format.formatStat(response.playerData);
+      let playerData = formatStat(response.playerData);
       let teamData = response.teamData;
       res.render('stats', {
         playerData: playerData,
-        team: format.formatTeamName(url),
+        team: formatTeamName(url),
         teamData: teamData
       });
     }).catch(() => {
@@ -60,11 +61,11 @@ app.get('/player/:playerId', (req, res) => {
   let playerId = req.params.playerId;
   let url = 'https://www.nba.com/playerfile/' + playerId;
 
-  nbaService.getPlayerData(url)
+  getPlayerData(url)
     .then(response => {
       let playerObj = response;
       playerObj.bio = _.compact(playerObj.bioList);
-      playerObj.data = format.formatPlayerData(playerObj.rawInfo);
+      playerObj.data = formatPlayerData(playerObj.rawInfo);
       delete playerObj.rawInfo;
       delete playerObj.bioList;
       res.render('player', {playerObj});
@@ -73,6 +74,6 @@ app.get('/player/:playerId', (req, res) => {
     });
 });
 
-app.listen(process.env.PORT || 3333);
-console.log('Running on 3333');
+app.listen(process.env.PORT || 3333, () => console.log('Running on 3333'));
+
 exports = module.exports = app;

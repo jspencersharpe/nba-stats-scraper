@@ -2,30 +2,28 @@ const request = require('request');
 var Promise = require('promise');
 const cheerio = require('cheerio');
 
-var exports = module.exports = {};
-
-exports.getNBAData = (url) => {
-  let self = this;
+export function getNBAData(url) {
   return new Promise((resolve) => {
     request(url, (error, response, html) => {
       if (!error) {
         let $ = cheerio.load(html);
-        self.playerInfo = [];
-        self.teamInfo = [];
-        self.imagesArr = [];
-        self.idArr = [];
+        let playerInfo = [];
+        let teamInfo = [];
+        let imagesArr = [];
+        let idArr = [];
+
         $('#logo').each(function() {
           let img = $('img');
           let teamLogo = img[0].attribs.src;
-          self.teamInfo = {
+          teamInfo = {
             teamLogo: teamLogo
           };
         });
         $('.stats-table.season-averages tr').each(function(index) {
           let playerLink = $('.playerName a');
           let playerImg = $('.player-name__inner-wrapper img');
-          self.idArr.push(playerLink[index].attribs.href);
-          self.imagesArr.push(playerImg[index].attribs.src);
+          idArr.push(playerLink[index].attribs.href);
+          imagesArr.push(playerImg[index].attribs.src);
           let data = {
             name: $('.playerName', this).text(),
             gp: $('.gp', this).text(),
@@ -43,30 +41,33 @@ exports.getNBAData = (url) => {
             tov: $('.tov', this).text(),
             pf: $('.pf', this).text()
           };
-          self.playerInfo.push(data);
+          playerInfo.push(data);
         });
-        self.imagesArr.unshift('');
-        self.idArr.unshift('');
-        let idArr = self.idArr.map((x) => {
+        imagesArr.unshift('');
+        idArr.unshift('');
+        let newIdAr = idArr.map((x) => {
           let splt = x.split('/');
           return splt[4];
         });
-        self.playerInfo.forEach((value, index) => {
-          value.pic = self.imagesArr[index];
-          value.playerId = idArr[index];
+
+        playerInfo.forEach((value, index) => {
+          value.pic = imagesArr[index];
+          value.playerId = newIdAr[index];
           return value;
         });
+
         let teamData = {
-          playerData: self.playerInfo,
-          teamData: self.teamInfo
+          playerData: playerInfo,
+          teamData: teamInfo
         };
+
         resolve(teamData);
       }
     });
   });
-};
+}
 
-exports.getPlayerData = (url) => {
+export function getPlayerData(url) {
   return new Promise((resolve) => {
     request(url, (error, response, html) => {
       if (!error) {
@@ -140,4 +141,4 @@ exports.getPlayerData = (url) => {
       }
     });
   });
-};
+}

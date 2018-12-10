@@ -2,16 +2,14 @@ const request = require('request');
 var Promise = require('promise');
 const cheerio = require('cheerio');
 
-var exports = module.exports = {};
-
-exports.getNCAAIDs = (url) => {
-  let self = this;
+export function getNCAAIDs(url) {
   return new Promise((resolve) => {
+    let json = [];
+
     request(url, (error, response, html) => {
       if (!error) {
         let $ = cheerio.load(html);
-        self.json = [];
-        $('.medium-logos h5').each(function() {
+        $('.TeamLinks').each(function () {
           let link = $('a', this).attr('href');
           let spl = link.split('_');
           let id = spl[1];
@@ -21,10 +19,11 @@ exports.getNCAAIDs = (url) => {
             teamName: teamName,
             link: link
           };
-          self.json.push(data);
+
+          json.push(data);
         });
       }
-      resolve(self.json)
+      resolve(json);
     });
   });
 }

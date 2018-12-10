@@ -4,7 +4,7 @@ html
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous")
     link(href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
     link(rel="stylesheet", href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
-  body 
+  body
     .container-fluid
       .row.mb-4.mt-2
         .col-12
@@ -19,4 +19,4 @@ html
           ul.list-group
           each team in schoolData
             li.list-group-item
-              a(href='#{team.link}', target='_blank')= team.teamName
+              a(href=`${team.link}`, target='_blank')= team.teamName

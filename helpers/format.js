@@ -1,6 +1,4 @@
-var exports = module.exports = {};
-
-exports.formatStat = (data) => {
+export function formatStat(data) {
   data.forEach((value) => {
     if (value.gp === '') { value.gp = '-'; }
     if (value.pts === '') { value.pts = '-'; }
@@ -17,14 +15,14 @@ exports.formatStat = (data) => {
   });
 
   return data;
-};
+}
 
-exports.formatTeamName = (url) => {
+export function formatTeamName(url) {
   let newUrl = url.split('/');
   return newUrl[3].toUpperCase();
-};
+}
 
-exports.formatTeamData = (data) => {
+export function formatTeamData (data) {
   data.forEach((value) => {
     value.btnText = 'View Players';
     value.className = 'nba-team';
@@ -43,18 +41,19 @@ exports.formatTeamData = (data) => {
   });
 
   return data;
-};
+}
 
-exports.formatPlayerData = (data) => {
+export function formatPlayerData(data) {
   let arr = [];
   for (let item of data) {
     let split = item.split(' ');
     arr.push(...split);
   }
+
   let filtered = arr.filter(i => i !== '');
   let inches = filtered[1].split('in');
   let weight = filtered[2].split('in');
-  let inch = inches[0].split('ft')
+  let inch = inches[0].split('ft');
   let height = `${filtered[0]}ft, ${inch[1]}in`;
 
   return {
@@ -63,15 +62,16 @@ exports.formatPlayerData = (data) => {
     dob: filtered[4],
     age: filtered[6]
   };
-};
+}
 
-exports.formatSchoolList = (data) => {
+export function formatSchoolList(data) {
   for (let school of data) {
     let name = school.teamName.split('-');
     school.teamName = formatStrings(name).join(' ');
+    school.link = `http://www.espn.com${school.link}`;
   }
   return data;
-};
+}
 
 const formatStrings = (team) => {
   for (let i = 0; i < team.length; i++) {
