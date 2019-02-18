@@ -22,18 +22,13 @@ export function formatTeamName(url) {
   return newUrl[3].toUpperCase();
 }
 
-export function formatTeamData (data) {
-  data.forEach((value) => {
-    value.btnText = 'View Players';
-    value.className = 'nba-team';
-    if (value.name === 'Philadelphia 76ers') {
-      value.route = 'sixers';
-    } else {
-      value.route = value.name.split(' ').splice(-1)[0].toLowerCase();
-    }
+export function addImage(list) {
+  list.map(t => {
+    t.url = `https://d2p3bygnnzw9w3.cloudfront.net/req/201902121/tlogo/bbr/${t.id}.png`;
+    return t;
   });
 
-  return data;
+  return list;
 }
 
 export function formatPlayerData(data) {

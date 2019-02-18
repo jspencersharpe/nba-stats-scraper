@@ -2,9 +2,9 @@
   .album
     .row
       each team in teamsList
-        .team.col-lg-3.col-md-6.text-center
+        .team.col-lg-3.col-md-6.text-center.p-4
           a(href=team.route)
-            img.rounded-circle(src=team.url, class=team.className)
+            img(src=team.url, class=team.className)
           h3= team.name
-          a#teamButton.btn.btn-secondary(href=team.route)= team.btnText
+          a#teamButton.btn.btn-secondary(href=team.route)= "View Players"
             |  »

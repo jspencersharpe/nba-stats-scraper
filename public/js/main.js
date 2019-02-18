@@ -6,13 +6,7 @@ $(document).ready(function() {
   var $container = $('.container-fluid');
   var $link = $('a');
   var $back = $('#back');
-  var $teamImg = $('.rounded-circle');
   var $teamButton = $('#teamButton');
-
-  $teamImg.on('click', function() {
-    hideElements($team, $nav);
-    toggleLoadingClass($body, $loading);
-  });
 
   $teamButton.on('click', function() {
     hideElements($team, $nav);

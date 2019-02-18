@@ -1,7 +1,7 @@
 import express from 'express';
 import _ from 'lodash';
 import { getTeamList } from './services/teams.service';
-import { formatStat, formatTeamData, formatTeamName, formatPlayerData } from './helpers/format';
+import { formatStat, addImage, formatTeamName, formatPlayerData } from './helpers/format';
 import { getNBAData, getPlayerData } from './services/nba.service';
 
 const app = express();
@@ -10,10 +10,13 @@ app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
-  let url = 'https://www.nba.com/teams';
+  let url = 'https://www.basketball-reference.com/teams/';
+
   getTeamList(url)
     .then(response => {
-      let teamsList = formatTeamData(response);
+      let teamsList = addImage(response);
+
+      console.log(teamsList);
       res.render('index', {
         teamsList: teamsList
       });
