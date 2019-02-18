@@ -1,8 +1,7 @@
 import express from 'express';
 import _ from 'lodash';
-import { getNCAAIDs } from './services/ncaa.service';
 import { getTeamList } from './services/teams.service';
-import { formatStat, formatSchoolList, formatTeamData, formatTeamName, formatPlayerData } from './helpers/format';
+import { formatStat, formatTeamData, formatTeamName, formatPlayerData } from './helpers/format';
 import { getNBAData, getPlayerData } from './services/nba.service';
 
 const app = express();
@@ -17,19 +16,6 @@ app.get('/', (req, res) => {
       let teamsList = formatTeamData(response);
       res.render('index', {
         teamsList: teamsList
-      });
-    }).catch(() => {
-      res.render('404', {});
-    });
-});
-
-app.get('/ncaa/', (req, res) => {
-  let url = 'https://espn.go.com/mens-college-basketball/teams';
-  getNCAAIDs(url)
-    .then(response => {
-      let orderedSchoolData = _.orderBy(response, ['teamName'], ['asc']);
-      res.render('ncaa', {
-        schoolData: formatSchoolList(orderedSchoolData)
       });
     }).catch(() => {
       res.render('404', {});
