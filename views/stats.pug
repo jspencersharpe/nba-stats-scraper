@@ -45,8 +45,6 @@ html
               each player, index in playerData
                 tr
                 if (index !== 0)
-                  td
-                    img.player-pic(src=player.pic)
                   td.text-center
                     a(href="/player/" + player.playerId)= player.name
                   td.text-center= player.num

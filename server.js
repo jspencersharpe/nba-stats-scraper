@@ -2,7 +2,7 @@ import express from 'express';
 import _ from 'lodash';
 import { getTeamList } from './services/teams.service';
 import { formatStat, addImage, formatTeamName, formatPlayerData } from './helpers/format';
-import { getNBAData, getPlayerData } from './services/nba.service';
+import { getStatsData, getPlayerData } from './services/nba.service';
 
 const app = express();
 
@@ -16,7 +16,6 @@ app.get('/', (req, res) => {
     .then(response => {
       let teamsList = addImage(response);
 
-      console.log(teamsList);
       res.render('index', {
         teamsList: teamsList
       });
@@ -25,14 +24,12 @@ app.get('/', (req, res) => {
     });
 });
 
-app.get('/:team', (req, res) => {
-  let team = req.params.team;
-  let url = 'https://www.nba.com/' + team + '/stats';
-  if (team === 'mavericks') {
-    res.render('mavs');
-  }
+app.get('/teams/:teamId', (req, res) => {
+  const year = (new Date()).getFullYear();
+  let team = req.params.teamId;
+  let url = `https://www.basketball-reference.com/teams/${team}/${year}.html`;
 
-  getNBAData(url)
+  getStatsData(url)
     .then(response => {
       let playerData = formatStat(response.playerData);
       let teamData = response.teamData;

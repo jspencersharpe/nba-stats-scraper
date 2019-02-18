@@ -2,48 +2,53 @@ const request = require('request');
 var Promise = require('promise');
 const cheerio = require('cheerio');
 
-export function getNBAData(url) {
+export function getStatsData(url) {
   return new Promise((resolve) => {
     request(url, (error, response, html) => {
       if (!error) {
         let $ = cheerio.load(html);
         let playerInfo = [];
         let teamInfo = [];
-        let imagesArr = [];
         let idArr = [];
 
-        $('#logo').each(function() {
-          let img = $('img');
-          let teamLogo = img[0].attribs.src;
-          teamInfo = {
-            teamLogo: teamLogo
-          };
+        const teamLogo = $('.teamlogo')[0].attribs.src;
+
+        teamInfo = {
+          teamLogo: teamLogo
+        };
+
+        $('#all_per_game .stats_table tbody tr').each(function (index, item) {
+          console.log(index);
+
+
+          console.log($('[data-stat="player"]', this).text());
+
+          $('td', item).each(function (idx, itm) {
+            console.log('hello');
+            // console.log(itm.attribs['data-stat']);
+            console.log($('[data-stat="player"]', itm).text());
+
+            let data = {
+              name: $('[data-stat="player"]').text(),
+              gp: $('.gp', this).text(),
+              num: $('.playerNumber', this).text(),
+              pos: $('.playerPosition', this).text(),
+              pts: $('.pts', this).text(),
+              fg_pct: $('.fg_pct', this).text(),
+              fg3_pct: $('.fg3_pct', this).text(),
+              ft_pct: $('.ft_pct', this).text(),
+              ast: $('.ast', this).text(),
+              reb: $('.reb', this).text(),
+              oreb: $('.oreb', this).text(),
+              dreb: $('.dreb', this).text(),
+              stl: $('.stl', this).text(),
+              tov: $('.tov', this).text(),
+              pf: $('.pf', this).text()
+            };
+
+            playerInfo.push(data);
+          });
         });
-        $('.stats-table.season-averages tr').each(function(index) {
-          let playerLink = $('.playerName a');
-          let playerImg = $('.player-name__inner-wrapper img');
-          idArr.push(playerLink[index].attribs.href);
-          imagesArr.push(playerImg[index].attribs.src);
-          let data = {
-            name: $('.playerName', this).text(),
-            gp: $('.gp', this).text(),
-            num: $('.playerNumber', this).text(),
-            pos: $('.playerPosition', this).text(),
-            pts: $('.pts', this).text(),
-            fg_pct: $('.fg_pct', this).text(),
-            fg3_pct: $('.fg3_pct', this).text(),
-            ft_pct: $('.ft_pct', this).text(),
-            ast: $('.ast', this).text(),
-            reb: $('.reb', this).text(),
-            oreb: $('.oreb', this).text(),
-            dreb: $('.dreb', this).text(),
-            stl: $('.stl', this).text(),
-            tov: $('.tov', this).text(),
-            pf: $('.pf', this).text()
-          };
-          playerInfo.push(data);
-        });
-        imagesArr.unshift('');
         idArr.unshift('');
         let newIdAr = idArr.map((x) => {
           let splt = x.split('/');
@@ -51,7 +56,6 @@ export function getNBAData(url) {
         });
 
         playerInfo.forEach((value, index) => {
-          value.pic = imagesArr[index];
           value.playerId = newIdAr[index];
           return value;
         });
