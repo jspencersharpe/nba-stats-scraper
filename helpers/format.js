@@ -15,20 +15,12 @@ export function formatStat(data) {
     return players;
 }
 
-export function formatTeamName(url) {
-  let newUrl = url.split('/');
-  return newUrl[3].toUpperCase();
-}
-
 export function formatTeamData (data) {
-    return data.league.standard
-        .filter(t => t.isNBAFranchise)
-        .map(team => {
-            team.route = team.urlName;
-            team.imgUrl = `https://www.nba.com/assets/logos/teams/primary/web/${team.tricode}.svg`
+    return data.map(team => {
+        team.imgUrl = `https://www.nba.com/assets/logos/teams/primary/web/${team.tricode}.svg`
 
-            return team;
-        });
+        return team;
+    });
 }
 
 export function formatPlayerData(data) {
