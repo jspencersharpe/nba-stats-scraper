@@ -2,68 +2,30 @@ const request = require('request');
 var Promise = require('promise');
 const cheerio = require('cheerio');
 
+
 export function getStatsData(url) {
   return new Promise((resolve) => {
     request(url, (error, response, html) => {
+
       if (!error) {
         let $ = cheerio.load(html);
         let playerInfo = [];
         let teamInfo = [];
         let idArr = [];
 
-        const teamLogo = $('.teamlogo')[0].attribs.src;
+        $('tbody', '#per_game').each(function (item, index) {
+          console.log(this)
+          console.log('HI')
+          console.log($('tr:first-child', this).text());
+        })
 
-        teamInfo = {
-          teamLogo: teamLogo
-        };
-
-        $('#all_per_game .stats_table tbody tr').each(function (index, item) {
-          console.log(index);
+        // $('#all_per_game').each(function (index, item) {
+        //   console.log(index);
 
 
-          console.log($('[data-stat="player"]', this).text());
+        // });
 
-          $('td', item).each(function (idx, itm) {
-            console.log('hello');
-            // console.log(itm.attribs['data-stat']);
-            console.log($('[data-stat="player"]', itm).text());
-
-            let data = {
-              name: $('[data-stat="player"]').text(),
-              gp: $('.gp', this).text(),
-              num: $('.playerNumber', this).text(),
-              pos: $('.playerPosition', this).text(),
-              pts: $('.pts', this).text(),
-              fg_pct: $('.fg_pct', this).text(),
-              fg3_pct: $('.fg3_pct', this).text(),
-              ft_pct: $('.ft_pct', this).text(),
-              ast: $('.ast', this).text(),
-              reb: $('.reb', this).text(),
-              oreb: $('.oreb', this).text(),
-              dreb: $('.dreb', this).text(),
-              stl: $('.stl', this).text(),
-              tov: $('.tov', this).text(),
-              pf: $('.pf', this).text()
-            };
-
-            playerInfo.push(data);
-          });
-        });
-        idArr.unshift('');
-        let newIdAr = idArr.map((x) => {
-          let splt = x.split('/');
-          return splt[4];
-        });
-
-        playerInfo.forEach((value, index) => {
-          value.playerId = newIdAr[index];
-          return value;
-        });
-
-        let teamData = {
-          playerData: playerInfo,
-          teamData: teamInfo
-        };
+        const teamData = {};
 
         resolve(teamData);
       }

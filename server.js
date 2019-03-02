@@ -33,11 +33,11 @@ app.get('/teams/:teamId', (req, res) => {
     .then(response => {
       let playerData = formatStat(response.playerData);
       let teamData = response.teamData;
-      res.render('stats', {
-        playerData: playerData,
-        team: formatTeamName(url),
-        teamData: teamData
-      });
+      // res.render('stats', {
+      //   playerData: playerData,
+      //   team: formatTeamName(url),
+      //   teamData: teamData
+      // });
     }).catch(() => {
       res.render('404', {});
     });

@@ -1,11 +1,10 @@
 {
   "name": "node-web-scraper",
   "version": "0.0.1",
-  "description": "Scrape le web.",
   "main": "server.js",
-  "author": "Scotch",
+  "author": "jspencersharpe",
   "dependencies": {
-    "cheerio": "latest",
+    "cheerio": "0.22.0",
     "express": "4.16.4",
     "lodash": "4.17.11",
     "promise": "8.0.2",
