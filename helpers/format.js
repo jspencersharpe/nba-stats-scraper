@@ -1,20 +1,18 @@
 export function formatStat(data) {
-  data.forEach((value) => {
-    if (value.gp === '') { value.gp = '-'; }
-    if (value.pts === '') { value.pts = '-'; }
-    if (value.fg_pct === '') { value.fg_pct = '-'; }
-    if (value.fg3_pct === '') { value.fg3_pct = '-'; }
-    if (value.ft_pct === '') { value.ft_pct = '-'; }
-    if (value.ast === '') { value.ast = '-'; }
-    if (value.reb === '') { value.reb = '-'; }
-    if (value.oreb === '') { value.oreb = '-'; }
-    if (value.dreb === '') { value.dreb = '-'; }
-    if (value.stl === '') { value.stl = '-'; }
-    if (value.tov === '') { value.tov = '-'; }
-    if (value.pf === '') { value.pf = '-'; }
-  });
+    const { headers, rowSet } = data.resultSets[0];
+    let players = [];
 
-  return data;
+    for (var i = 0; i < rowSet.length; i++) {
+        let player = {};
+
+        rowSet[i].map((d, idx) => {
+            return Object.assign(player, {[headers[idx]]: d});
+        });
+
+        players.push(player);
+    }
+
+    return players;
 }
 
 export function formatTeamName(url) {

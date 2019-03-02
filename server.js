@@ -22,21 +22,21 @@ app.get('/', (req, res) => {
     });
 });
 
-app.get('/:team', (req, res) => {
-  let team = req.params.team;
-  let url = 'https://www.nba.com/' + team + '/stats';
-  if (team === 'mavericks') {
-    res.render('mavs');
-  }
+app.get('/:teamId', (req, res) => {
+  const teamId = req.params.teamId;
+  const url = `https://stats.nba.com/stats/commonteamroster?LeagueID=00&Season=2018-19&TeamID=${teamId}`;
 
   getNBAData(url)
     .then(response => {
-      let playerData = formatStat(response.playerData);
+
+      let playerData = formatStat(response);
       let teamData = response.teamData;
+
+      console.log(playerData);
       res.render('stats', {
         playerData: playerData,
-        team: formatTeamName(url),
-        teamData: teamData
+        // team: formatTeamName(url),
+        // teamData: teamData
       });
     }).catch(() => {
       res.render('404', {});

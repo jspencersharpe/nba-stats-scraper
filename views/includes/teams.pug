@@ -3,8 +3,8 @@
     .row
       each team in teamsList
         .team.col-lg-3.col-md-6.text-center
-          a(href=team.route)
+          a(href=team.teamId)
             img.rounded-circle(src=team.imgUrl, class='nba-team')
           h3= team.fullName
-          a#teamButton.btn.btn-light(href=team.route)= 'View Players'
+          a#teamButton.btn.btn-light(href=team.teamId)= 'View Players'
             |  »
