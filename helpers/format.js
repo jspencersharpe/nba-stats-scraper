@@ -23,17 +23,14 @@ export function formatTeamName(url) {
 }
 
 export function formatTeamData (data) {
-  data.forEach((value) => {
-    value.btnText = 'View Players';
-    value.className = 'nba-team';
-    if (value.name === 'Philadelphia 76ers') {
-      value.route = 'sixers';
-    } else {
-      value.route = value.name.split(' ').splice(-1)[0].toLowerCase();
-    }
-  });
+    return data.league.standard
+        .filter(t => t.isNBAFranchise)
+        .map(team => {
+            team.route = team.urlName;
+            team.imgUrl = `https://www.nba.com/assets/logos/teams/primary/web/${team.tricode}.svg`
 
-  return data;
+            return team;
+        });
 }
 
 export function formatPlayerData(data) {

@@ -10,10 +10,10 @@ app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
-  let url = 'https://www.nba.com/teams';
+  let url = 'http://data.nba.net/10s/prod/v2/2018/teams.json';
   getTeamList(url)
     .then(response => {
-      let teamsList = formatTeamData(response);
+      const teamsList = formatTeamData(response);
       res.render('index', {
         teamsList: teamsList
       });

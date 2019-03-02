@@ -4,7 +4,7 @@
       each team in teamsList
         .team.col-lg-3.col-md-6.text-center
           a(href=team.route)
-            img.rounded-circle(src=team.url, class=team.className)
-          h3= team.name
-          a#teamButton.btn.btn-secondary(href=team.route)= team.btnText
+            img.rounded-circle(src=team.imgUrl, class='nba-team')
+          h3= team.fullName
+          a#teamButton.btn.btn-secondary(href=team.route)= 'View Players'
             |  »
