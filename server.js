@@ -1,5 +1,6 @@
 import express from 'express';
-import { formatStat, formatTeamData, formatPlayerData, formatPlayerStats } from './helpers/format';
+import { format } from 'date-fns';
+import { formatStat, formatPlayerData, formatPlayerStats, formatHeaders } from './helpers/format';
 import getNBAData from './services/nba.service';
 const teamConfig = require('./teams_config.json');
 
@@ -9,9 +10,8 @@ app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
-  const teamsList = formatTeamData(teamConfig);
   res.render('index', {
-    teamsList: teamsList
+    teamsList: teamConfig
   });
 });
 
@@ -30,6 +30,7 @@ app.get('/:name([\\w-]{0,}?):teamId(\\d+)/', (req, res) => {
       });
 
       res.render('stats', {
+        headers: formatHeaders(playerData[0]),
         playerData: playerData,
         teamData: teamData
       });
@@ -43,20 +44,22 @@ app.get('/player/:playerId', (req, res) => {
   const url = `https://stats.nba.com/stats/playercareerstats?PlayerID=${playerId}&PerMode=PerGame`;
   const infoUrl = `https://stats.nba.com/stats/commonplayerinfo?LeagueID=00&PlayerID=${playerId}`
 
-  let playerStats = getNBAData(url).then(response => {
+  const playerStats = getNBAData(url).then(response => {
     const data = response.resultSets[0]
     return formatPlayerStats(data);
   });
 
-  let playerInfo = getNBAData(infoUrl).then(response => {
+  const playerInfo = getNBAData(infoUrl).then(response => {
     const data = response.resultSets[0];
     return formatPlayerData(data);
   });
 
   Promise.all([playerStats, playerInfo]).then(response => {
     const [stats, playerInfo] = response;
+    playerInfo.BIRTHDATE = format(playerInfo.BIRTHDATE, 'MM/DD/YYYY');
 
     res.render('player', {
+      headers: formatHeaders(stats[0]),
       stats: stats,
       playerInfo: playerInfo
     });

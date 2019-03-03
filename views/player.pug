@@ -5,7 +5,8 @@ html
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous")
     link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css")
     link(rel="stylesheet" type="text/css" href="/css/style.css")
-    script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js")
+    script(type="text/javascript", src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js")
+    script(type="text/javascript", src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.28.3/js/jquery.tablesorter.min.js")
     script(type="text/javascript", src="/js/main.js")
 
   body
@@ -19,7 +20,7 @@ html
             |  Back
       .row
         .col-12.col-lg-2
-          img.player-pic(src=`https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${playerInfo.PERSON_ID}.png`)
+          img.player-pic(src=`https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${playerInfo.PERSON_ID}.png` width="136" height="100")
         .col-12.col-lg-10
           h1= playerInfo.DISPLAY_FIRST_LAST
           h2
@@ -49,12 +50,16 @@ html
                 = playerInfo.SCHOOL
       .row.mt-4
         .col-12
-          table.table
+          table#stats-table.table.table-hover.tablesorter
             tbody
               thead
                 tr
-                  each header in  Object.keys(stats[0])
-                    if (!['PLAYER_ID', 'LEAGUE_ID', 'TEAM_ID'].includes(header))
+                  each header in headers
+                    if (header === 'LEAGUE')
+                      th= 'TEAM'
+                    else if (header === 'PLAYER AGE')
+                      th= 'AGE'
+                    else
                       th= header
 
               each season in stats
@@ -83,3 +88,9 @@ html
                     td= season.TOV
                     td= season.PF
                     td= season.PTS
+
+script.
+  $(document).ready(function() {
+    $("#stats-table").tablesorter();
+    $("#stats-table").tablesorter( {sortList: [[0,0], [1,0]]} );
+  });

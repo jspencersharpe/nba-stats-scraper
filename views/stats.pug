@@ -20,7 +20,7 @@ html
 
       .row(style=`background-color: ${teamData.primaryColor}`)
         .col-12.d-flex.align-items-center
-            img(src=teamData.imgUrl)
+            img(src=teamData.imgUrl width="150" height="150")
             h1(style="color: #FFF")= teamData.ttsName
       .row
         .col-12
@@ -28,15 +28,17 @@ html
             thead
               tr
                 th
-                each header in Object.keys(playerData[0])
-                  if (!['PLAYER_ID', 'LeagueID', 'TeamID', 'SEASON'].includes(header))
+                each header in headers
+                  if (header === 'BIRTH DATE')
+                    th= 'DOB'
+                  else
                     th.text-left(style="cursor: pointer")= header
 
             tbody
               each player in playerData
                 tr
                   td
-                    img.player-pic(src=`https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${player.PLAYER_ID}.png`)
+                    img.player-pic(src=`https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${player.PLAYER_ID}.png` width="136" height="100")
                   td.text-left
                     a(href="/player/" + player.PLAYER_ID)= player.PLAYER
                   td.text-left= player.NUM
