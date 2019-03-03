@@ -1,8 +1,8 @@
 import express from 'express';
-import _ from 'lodash';
-import { getTeamList } from './services/teams.service';
-import { formatStat, formatTeamData, formatTeamName, formatPlayerData } from './helpers/format';
-import { getNBAData, getPlayerData } from './services/nba.service';
+import { format } from 'date-fns';
+import { formatStat, formatPlayerData, formatPlayerStats, formatHeaders } from './helpers/format';
+import getNBAData from './services/nba.service';
+const teamConfig = require('./teams_config.json');
 
 const app = express();
 
@@ -10,32 +10,28 @@ app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
-  let url = 'http://data.nba.net/10s/prod/v2/2018/teams.json';
-  getTeamList(url)
-    .then(response => {
-      const teamsList = formatTeamData(response);
-      res.render('index', {
-        teamsList: teamsList
-      });
-    }).catch(() => {
-      res.render('404', {});
-    });
+  res.render('index', {
+    teamsList: teamConfig
+  });
 });
 
-app.get('/:team', (req, res) => {
-  let team = req.params.team;
-  let url = 'https://www.nba.com/' + team + '/stats';
-  if (team === 'mavericks') {
-    res.render('mavs');
-  }
+app.get('/:name([\\w-]{0,}?):teamId(\\d+)/', (req, res) => {
+  let { name, teamId } = req.params;
+  name = name.replace(/-/g, "");
+  const url = `https://stats.nba.com/stats/commonteamroster?LeagueID=00&Season=2018-19&TeamID=${teamId}`;
+  const imgUrl = `https://www.nba.com/assets/logos/teams/primary/web/${name}.svg`
 
   getNBAData(url)
     .then(response => {
-      let playerData = formatStat(response.playerData);
-      let teamData = response.teamData;
+      let playerData = formatStat(response);
+      const currentTeam = teamConfig.find(t => t.teamId === teamId);
+      const teamData = Object.assign({}, currentTeam, {
+        imgUrl: imgUrl
+      });
+
       res.render('stats', {
+        headers: formatHeaders(playerData[0]),
         playerData: playerData,
-        team: formatTeamName(url),
         teamData: teamData
       });
     }).catch(() => {
@@ -45,19 +41,32 @@ app.get('/:team', (req, res) => {
 
 app.get('/player/:playerId', (req, res) => {
   let playerId = req.params.playerId;
-  let url = 'https://www.nba.com/playerfile/' + playerId;
+  const url = `https://stats.nba.com/stats/playercareerstats?PlayerID=${playerId}&PerMode=PerGame`;
+  const infoUrl = `https://stats.nba.com/stats/commonplayerinfo?LeagueID=00&PlayerID=${playerId}`
 
-  getPlayerData(url)
-    .then(response => {
-      let playerObj = response;
-      playerObj.bio = _.compact(playerObj.bioList);
-      playerObj.data = formatPlayerData(playerObj.rawInfo);
-      delete playerObj.rawInfo;
-      delete playerObj.bioList;
-      res.render('player', {playerObj});
-    }).catch(() => {
-      res.render('404', {});
+  const playerStats = getNBAData(url).then(response => {
+    const data = response.resultSets[0]
+    return formatPlayerStats(data);
+  });
+
+  const playerInfo = getNBAData(infoUrl).then(response => {
+    const data = response.resultSets[0];
+    return formatPlayerData(data);
+  });
+
+  Promise.all([playerStats, playerInfo]).then(response => {
+    const [stats, playerInfo] = response;
+    playerInfo.BIRTHDATE = format(playerInfo.BIRTHDATE, 'MM/DD/YYYY');
+
+    res.render('player', {
+      headers: formatHeaders(stats[0]),
+      stats: stats,
+      playerInfo: playerInfo
     });
+
+  }).catch(() => {
+    res.render('404', {});
+  });
 });
 
 app.listen(process.env.PORT || 3333, () => console.log('Running on 3333'));

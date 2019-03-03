@@ -3,10 +3,10 @@ html
     meta(name="viewport", content="width=device-width, initial-scale=1")
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous")
     link(rel="stylesheet", href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
-    link(rel="stylesheet", type="text/css", href="css/style.css")
+    link(rel="stylesheet", type="text/css", href="/css/style.css")
     script(type="text/javascript", src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js")
     script(type="text/javascript", src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.28.3/js/jquery.tablesorter.min.js")
-    script(type="text/javascript", src="js/main.js")
+    script(type="text/javascript", src="/js/main.js")
 
   body
     nav.navbar
@@ -17,52 +17,38 @@ html
           a(href='/')
             i.fa.fa-arrow-left
             |  Back to all teams
+
+      .row(style=`background-color: ${teamData.primaryColor}`)
+        .col-12.d-flex.align-items-center
+            img(src=teamData.imgUrl width="150" height="150")
+            h1(style="color: #FFF")= teamData.ttsName
       .row
         .col-12
-          img(src=teamData.teamLogo)
-          h1= team
           table#stats-table.table.table-hover.tablesorter
             thead
               tr
-              if(playerData[0])
                 th
-                th.text-center(style="cursor: pointer") Name
-                th.text-center(style="cursor: pointer") Number
-                th.text-center(style="cursor: pointer") Position
-                th.text-left(style="cursor: pointer") GP
-                th.text-left(style="cursor: pointer")= playerData[0].pts
-                th.text-left(style="cursor: pointer")= playerData[0].fg_pct
-                th.text-left(style="cursor: pointer")= playerData[0].fg3_pct
-                th.text-left(style="cursor: pointer")= playerData[0].ft_pct
-                th.text-left(style="cursor: pointer")= playerData[0].ast
-                th.text-left(style="cursor: pointer")= playerData[0].reb
-                th.text-left(style="cursor: pointer")= playerData[0].oreb
-                th.text-left(style="cursor: pointer")= playerData[0].dreb
-                th.text-left(style="cursor: pointer")= playerData[0].stl
-                th.text-left(style="cursor: pointer")= playerData[0].tov
-                th.text-left(style="cursor: pointer")= playerData[0].pf
+                each header in headers
+                  if (header === 'BIRTH DATE')
+                    th= 'DOB'
+                  else
+                    th.text-left(style="cursor: pointer")= header
+
             tbody
-              each player, index in playerData
+              each player in playerData
                 tr
-                if (index !== 0)
                   td
-                    img.player-pic(src=player.pic)
-                  td.text-center
-                    a(href="/player/" + player.playerId)= player.name
-                  td.text-center= player.num
-                  td.text-center= player.pos
-                  td.text-left= player.gp
-                  td.text-left= player.pts
-                  td.text-left= player.fg_pct
-                  td.text-left= player.fg3_pct
-                  td.text-left= player.ft_pct
-                  td.text-left= player.ast
-                  td.text-left= player.reb
-                  td.text-left= player.oreb
-                  td.text-left= player.dreb
-                  td.text-left= player.stl
-                  td.text-left= player.tov
-                  td.text-left= player.pf
+                    img.player-pic(src=`https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${player.PLAYER_ID}.png` width="136" height="100")
+                  td.text-left
+                    a(href="/player/" + player.PLAYER_ID)= player.PLAYER
+                  td.text-left= player.NUM
+                  td.text-left= player.POSITION
+                  td.text-left= player.HEIGHT
+                  td.text-left= player.WEIGHT
+                  td.text-left= player.BIRTH_DATE
+                  td.text-left= player.AGE
+                  td.text-left= player.EXP
+                  td.text-left= player.SCHOOL
 
 script.
   $(document).ready(function() {

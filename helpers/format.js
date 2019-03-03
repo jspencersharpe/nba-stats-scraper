@@ -1,55 +1,55 @@
+export function formatHeaders(headers) {
+  headers = Object.keys(headers)
+    .filter(n => n !== 'SEASON' && n !== 'TEAM_ABBREVIATION' && n !== 'TeamID' && n !== 'TEAM_ID' && n !== 'LeagueID' && n !== 'PLAYER_ID')
+    .map(k => {
+      if (k.includes('_')) {
+        if (k.includes('_ID')) {
+          k = k.replace(/_ID/g, "");
+        } else {
+          k = k.replace(/_/g, " ");
+        }
+
+      }
+
+      return k;
+    });
+
+  return headers;
+}
+
 export function formatStat(data) {
-  data.forEach((value) => {
-    if (value.gp === '') { value.gp = '-'; }
-    if (value.pts === '') { value.pts = '-'; }
-    if (value.fg_pct === '') { value.fg_pct = '-'; }
-    if (value.fg3_pct === '') { value.fg3_pct = '-'; }
-    if (value.ft_pct === '') { value.ft_pct = '-'; }
-    if (value.ast === '') { value.ast = '-'; }
-    if (value.reb === '') { value.reb = '-'; }
-    if (value.oreb === '') { value.oreb = '-'; }
-    if (value.dreb === '') { value.dreb = '-'; }
-    if (value.stl === '') { value.stl = '-'; }
-    if (value.tov === '') { value.tov = '-'; }
-    if (value.pf === '') { value.pf = '-'; }
-  });
+  const { headers, rowSet } = data.resultSets[0];
+  let players = [];
 
-  return data;
+  for (var i = 0; i < rowSet.length; i++) {
+      const data = rowSet[i];
+      const player = Object.assign(...headers.map((k, i) => ({[k]: data[i]})));
+
+      players.push(player);
+  }
+
+  return players;
 }
 
-export function formatTeamName(url) {
-  let newUrl = url.split('/');
-  return newUrl[3].toUpperCase();
-}
+export function formatPlayerStats(data) {
+  const { headers, rowSet } = data;
+  let seasons = [];
 
-export function formatTeamData (data) {
-    return data.league.standard
-        .filter(t => t.isNBAFranchise)
-        .map(team => {
-            team.route = team.urlName;
-            team.imgUrl = `https://www.nba.com/assets/logos/teams/primary/web/${team.tricode}.svg`
+  for (var i = 0; i < rowSet.length; i++) {
+      const data = rowSet[i];
+      const season = Object.assign(...headers.map((k, i) => ({[k]: data[i]})));
 
-            return team;
-        });
+      seasons.push(season);
+  }
+
+  return seasons.reverse();
 }
 
 export function formatPlayerData(data) {
-  let arr = [];
-  for (let item of data) {
-    let split = item.split(' ');
-    arr.push(...split);
-  }
+  const { headers, rowSet } = data;
+  let info = rowSet[0];
 
-  let filtered = arr.filter(i => i !== '');
-  let inches = filtered[1].split('in');
-  let weight = filtered[2].split('in');
-  let inch = inches[0].split('ft');
-  let height = `${filtered[0]}ft, ${inch[1]}in`;
+  const playerData = Object.assign(...headers.map((k, i) => ({[k]: info[i]})));
 
-  return {
-    height: height,
-    weight: weight[1],
-    dob: filtered[4],
-    age: filtered[6]
-  };
+  return playerData;
 }

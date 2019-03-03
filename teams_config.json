@@ -1,0 +1,181 @@
+[{
+  "teamId": "1610612737",
+  "tricode": "ATL",
+  "ttsName": "Atlanta Hawks",
+  "primaryColor": "#e21a37",
+  "secondaryColor": "#e21a37"
+}, {
+  "teamId": "1610612751",
+  "tricode": "BKN",
+  "ttsName": "Brooklyn Nets",
+  "primaryColor": "#000000",
+  "secondaryColor": "#000000"
+}, {
+  "teamId": "1610612738",
+  "tricode": "BOS",
+  "ttsName": "Boston Celtics",
+  "primaryColor": "#00611b",
+  "secondaryColor": "#00611b"
+}, {
+  "teamId": "1610612766",
+  "tricode": "CHA",
+  "ttsName": "Charlotte Hornets",
+  "primaryColor": "#00848e",
+  "secondaryColor": "#00848e"
+}, {
+  "teamId": "1610612741",
+  "tricode": "CHI",
+  "ttsName": "Chicago Bulls",
+  "primaryColor": "#b00203",
+  "secondaryColor": "#b00203"
+}, {
+  "teamId": "1610612739",
+  "tricode": "CLE",
+  "ttsName": "Cleveland Cavaliers",
+  "primaryColor": "#860038",
+  "secondaryColor": "#860038"
+}, {
+  "teamId": "1610612742",
+  "tricode": "DAL",
+  "ttsName": "Dallas Mavericks",
+  "primaryColor": "#006bb6",
+  "secondaryColor": "#006bb6"
+}, {
+  "teamId": "1610612743",
+  "tricode": "DEN",
+  "ttsName": "Denver Nuggets",
+  "primaryColor": "#0e2240",
+  "secondaryColor": "#0e2240"
+}, {
+  "teamId": "1610612765",
+  "tricode": "DET",
+  "ttsName": "Detroit Pistons",
+  "primaryColor": "#fa002c",
+  "secondaryColor": "#fa002c"
+}, {
+  "teamId": "1610612744",
+  "tricode": "GSW",
+  "ttsName": "Golden State Warriors",
+  "primaryColor": "#003399",
+  "secondaryColor": "#003399"
+}, {
+  "teamId": "1610612745",
+  "tricode": "HOU",
+  "ttsName": "Houston Rockets",
+  "primaryColor": "#cd212b",
+  "secondaryColor": "#cd212b"
+}, {
+  "teamId": "1610612754",
+  "tricode": "IND",
+  "ttsName": "Indiana Pacers",
+  "primaryColor": "#ffb517",
+  "secondaryColor": "#ffb517"
+}, {
+  "teamId": "1610612746",
+  "tricode": "LAC",
+  "ttsName": "L.A. Clippers",
+  "primaryColor": "#ed174b",
+  "secondaryColor": "#ed174b"
+}, {
+  "teamId": "1610612747",
+  "tricode": "LAL",
+  "ttsName": "L.A. Lakers",
+  "primaryColor": "#fdba33",
+  "secondaryColor": "#fdba33"
+}, {
+  "teamId": "1610612763",
+  "tricode": "MEM",
+  "ttsName": "Memphis Grizzlies",
+  "primaryColor": "#5d76a9",
+  "secondaryColor": "#5d76a9"
+}, {
+  "teamId": "1610612748",
+  "tricode": "MIA",
+  "ttsName": "Miami Heat",
+  "primaryColor": "#98002e",
+  "secondaryColor": "#98002e"
+}, {
+  "teamId": "1610612749",
+  "ttsName": "Milwaukee Bucks",
+  "tricode": "MIL",
+  "primaryColor": "#00471b",
+  "secondaryColor": "#00471b"
+}, {
+  "teamId": "1610612750",
+  "tricode": "MIN",
+  "ttsName": "Minnesota Timberwolves",
+  "primaryColor": "#2b6291",
+  "secondaryColor": "#2b6291"
+}, {
+  "teamId": "1610612740",
+  "tricode": "NOP",
+  "ttsName": "New Orleans Pelicans",
+  "primaryColor": "#0c2340",
+  "secondaryColor": "#0c2340"
+}, {
+  "teamId": "1610612752",
+  "tricode": "NYK",
+  "ttsName": "New York Knicks",
+  "primaryColor": "#f58426",
+  "secondaryColor": "#f58426"
+}, {
+  "teamId": "1610612760",
+  "tricode": "OKC",
+  "ttsName": "Oklahoma City Thunder",
+  "primaryColor": "#002d62",
+  "secondaryColor": "#002d62"
+}, {
+  "teamId": "1610612753",
+  "tricode": "ORL",
+  "ttsName": "Orlando Magic",
+  "primaryColor": "#0077c0",
+  "secondaryColor": "#0077c0"
+}, {
+  "teamId": "1610612755",
+  "tricode": "PHI",
+  "ttsName": "Philadelphia 76ers",
+  "primaryColor": "#ef0022",
+  "secondaryColor": "#ef0022"
+}, {
+  "teamId": "1610612756",
+  "tricode": "PHX",
+  "ttsName": "Phoenix Suns",
+  "primaryColor": "#e76221",
+  "secondaryColor": "#e76221"
+}, {
+  "teamId": "1610612757",
+  "tricode": "POR",
+  "ttsName": "Portland Trail Blazers",
+  "primaryColor": "#cc0000",
+  "secondaryColor": "#cc0000"
+}, {
+  "teamId": "1610612758",
+  "tricode": "SAC",
+  "ttsName": "Sacramento Kings",
+  "primaryColor": "#51388a",
+  "secondaryColor": "#51388a"
+}, {
+  "teamId": "1610612759",
+  "tricode": "SAS",
+  "ttsName": "San Antonio Spurs",
+  "primaryColor": "#959191",
+  "secondaryColor": "#959191"
+}, {
+  "teamId": "1610612761",
+  "tricode": "TOR",
+  "ttsName": "Toronto Raptors",
+  "primaryColor": "#bd1b21",
+  "secondaryColor": "#bd1b21"
+}, {
+  "teamId": "1610612762",
+  "tricode": "UTA",
+  "ttsName": "Utah Jazz",
+  "primaryColor": "#f9a11e",
+  "secondaryColor": "#f9a11e"
+}, {
+  "teamId": "1610612764",
+  "tricode": "WAS",
+  "ttsName": "Washington Wizards",
+  "primaryColor": "#cf142b",
+  "secondaryColor": "#cf142b"
+}]
