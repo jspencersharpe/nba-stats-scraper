@@ -34,7 +34,8 @@ app.get('/:name([\\w-]{0,}?):teamId(\\d+)/', (req, res) => {
         playerData: playerData,
         teamData: teamData
       });
-    }).catch(() => {
+    }).catch((err) => {
+      console.log(err);
       res.render('404', {});
     });
 });
@@ -64,7 +65,8 @@ app.get('/player/:playerId', (req, res) => {
       playerInfo: playerInfo
     });
 
-  }).catch(() => {
+  }).catch((err) => {
+    console.log(err);
     res.render('404', {});
   });
 });
