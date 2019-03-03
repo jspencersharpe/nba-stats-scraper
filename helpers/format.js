@@ -3,11 +3,9 @@ export function formatStat(data) {
     let players = [];
 
     for (var i = 0; i < rowSet.length; i++) {
-        let player = {};
+        const data = rowSet[i];
 
-        rowSet[i].map((d, idx) => {
-            return Object.assign(player, {[headers[idx]]: d});
-        });
+        const player = Object.assign(...headers.map((k, i) => ({[k]: data[i]})))
 
         players.push(player);
     }
@@ -23,23 +21,25 @@ export function formatTeamData (data) {
     });
 }
 
+export function formatPlayerStats(data) {
+    const { headers, rowSet } = data;
+    let seasons = [];
+
+    for (var i = 0; i < rowSet.length; i++) {
+        const data = rowSet[i];
+        const season = Object.assign(...headers.map((k, i) => ({[k]: data[i]})))
+
+        seasons.push(season);
+    }
+
+    return seasons.reverse();
+}
+
 export function formatPlayerData(data) {
-  let arr = [];
-  for (let item of data) {
-    let split = item.split(' ');
-    arr.push(...split);
-  }
+    const { headers, rowSet } = data;
+    let info = rowSet[0];
 
-  let filtered = arr.filter(i => i !== '');
-  let inches = filtered[1].split('in');
-  let weight = filtered[2].split('in');
-  let inch = inches[0].split('ft');
-  let height = `${filtered[0]}ft, ${inch[1]}in`;
+    const playerData = Object.assign(...headers.map((k, i) => ({[k]: info[i]})))
 
-  return {
-    height: height,
-    weight: weight[1],
-    dob: filtered[4],
-    age: filtered[6]
-  };
+    return playerData;
 }

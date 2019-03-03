@@ -1,7 +1,6 @@
 import express from 'express';
-import _ from 'lodash';
-import { formatStat, formatTeamData, formatPlayerData } from './helpers/format';
-import { getNBAData, getPlayerData } from './services/nba.service';
+import { formatStat, formatTeamData, formatPlayerData, formatPlayerStats } from './helpers/format';
+import getNBAData from './services/nba.service';
 const teamConfig = require('./teams_config.json');
 
 const app = express();
@@ -16,8 +15,9 @@ app.get('/', (req, res) => {
     });
 });
 
-app.get('/:name/:teamId', (req, res) => {
-  const { name, teamId} = req.params;
+app.get('/:name([\\w-]{0,}?):teamId(\\d+)/', (req, res) => {
+  let { name, teamId} = req.params;
+  name = name.replace(/-/g, "");
   const url = `https://stats.nba.com/stats/commonteamroster?LeagueID=00&Season=2018-19&TeamID=${teamId}`;
   const imgUrl = `https://www.nba.com/assets/logos/teams/primary/web/${name}.svg`
 
@@ -38,16 +38,27 @@ app.get('/:name/:teamId', (req, res) => {
 
 app.get('/player/:playerId', (req, res) => {
   let playerId = req.params.playerId;
-  let url = 'https://www.nba.com/playerfile/' + playerId;
+  const url = `https://stats.nba.com/stats/playercareerstats?PlayerID=${playerId}&PerMode=PerGame`;
+  const infoUrl = `https://stats.nba.com/stats/commonplayerinfo?LeagueID=00&PlayerID=${playerId}`
 
-  getPlayerData(url)
-    .then(response => {
-      let playerObj = response;
-      playerObj.bio = _.compact(playerObj.bioList);
-      playerObj.data = formatPlayerData(playerObj.rawInfo);
-      delete playerObj.rawInfo;
-      delete playerObj.bioList;
-      res.render('player', {playerObj});
+    let playerStats = getNBAData(url).then(response => {
+        const data = response.resultSets[0]
+        return formatPlayerStats(data);
+    });
+
+    let playerInfo = getNBAData(infoUrl).then(response => {
+        const data = response.resultSets[0];
+        return formatPlayerData(data);
+    });
+
+    Promise.all([playerStats, playerInfo]).then(response => {
+        const [ stats, playerInfo ] = response;
+
+        res.render('player', {
+            stats: stats,
+            playerInfo: playerInfo
+        });
+
     }).catch(() => {
       res.render('404', {});
     });

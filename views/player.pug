@@ -18,67 +18,68 @@ html
             i.fa.fa-arrow-left
             |  Back
       .row
-        .col-12
-          h1= playerObj.name
+        .col-12.col-lg-2
+          img.player-pic(src=`https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${playerInfo.PERSON_ID}.png`)
+        .col-12.col-lg-10
+          h1= playerInfo.DISPLAY_FIRST_LAST
+          h2
+            = playerInfo.TEAM_CITY
+            = playerInfo.TEAM_NAME
+          h5
+            = playerInfo.POSITION
+            | ,  #
+            = playerInfo.JERSEY
       .row
         .col-sm-6.col-md-4.col-lg-3
-          img(src=playerObj.img)
           .d-flex.align-items-center.justify-content-between.pt-2
             .text-left
               .text-muted Height
-              h4= playerObj.data.height
+              h4= playerInfo.HEIGHT
             .text-left
               .text-muted Weight
-              h4= playerObj.data.weight
+              h4= playerInfo.WEIGHT
                 | lbs
-          .d-flex.align-items-center.justify-content-between.mt-2
-            .text-left
-              span.text-muted BORN
-            .text-right
-              span.text-muted= playerObj.data.dob
-          .d-flex.align-items-center.justify-content-between
-            .text-left
-              span.text-muted AGE
-            .text-right
-              span.text-muted= playerObj.data.age
-                |  years old
+          .mt-2
+            .text-muted
+                | BORN:
+                = playerInfo.BIRTHDATE
 
-        .col-lg-9
-          p.bio= playerObj.bio
+            .text-muted
+                | SCHOOL:
+                = playerInfo.SCHOOL
       .row.mt-4
         .col-12
           table.table
             tbody
               thead
                 tr
-                  th
-                  th MPG
-                  th FG%
-                  th 3P%
-                  th FT%
-                  th PPG
-                  th RPG
-                  th APG
-                  th BPG
-            if (playerObj.seasonStats)
-              tr
-                th SEASON
-                td= playerObj.seasonStats.mpg
-                td= playerObj.seasonStats.fg
-                td= playerObj.seasonStats.tp
-                td= playerObj.seasonStats.ft
-                td= playerObj.seasonStats.ppg
-                td= playerObj.seasonStats.rpg
-                td= playerObj.seasonStats.apg
-                td= playerObj.seasonStats.bpg
-            if (playerObj.careerStats)
-              tr
-                th CAREER
-                td= playerObj.careerStats.mpg
-                td= playerObj.careerStats.fg
-                td= playerObj.careerStats.tp
-                td= playerObj.careerStats.ft
-                td= playerObj.careerStats.ppg
-                td= playerObj.careerStats.rpg
-                td= playerObj.careerStats.apg
-                td= playerObj.careerStats.bpg
+                  each header in  Object.keys(stats[0])
+                    if (!['PLAYER_ID', 'LEAGUE_ID', 'TEAM_ID'].includes(header))
+                      th= header
+
+              each season in stats
+                tr
+                    td= season.SEASON_ID
+                    td= season.TEAM_ABBREVIATION
+                    td= season.PLAYER_AGE
+                    td= season.GP
+                    td= season.GS
+                    td= season.MIN
+                    td= season.FGM
+                    td= season.FGA
+                    td= season.FG_PCT
+                    td= season.FG3M
+                    td= season.FG3A
+                    td= season.FG3_PCT
+                    td= season.FTM
+                    td= season.FTA
+                    td= season.FT_PCT
+                    td= season.OREB
+                    td= season.DREB
+                    td= season.REB
+                    td= season.AST
+                    td= season.STL
+                    td= season.BLK
+                    td= season.TOV
+                    td= season.PF
+                    td= season.PTS

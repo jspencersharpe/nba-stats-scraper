@@ -9,7 +9,6 @@
     "es6-promise": "^4.2.6",
     "express": "4.16.4",
     "isomorphic-fetch": "^2.2.1",
-    "lodash": "4.17.11",
     "promise": "8.0.2",
     "pug": "2.0.3",
     "request": "2.88.0"

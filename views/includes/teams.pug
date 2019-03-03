@@ -3,8 +3,8 @@
     .row
       each team in teamsList
         .team.col-lg-3.col-md-6.text-center
-          a(href=`/${team.tricode}/${team.teamId}`)
+          a(href=`/${team.tricode}-${team.teamId}`)
             img.rounded-circle(src=team.imgUrl, class='nba-team')
           h3= team.ttsName
-          a#teamButton.btn.btn-light(href=`/${team.tricode}/${team.teamId}`)= 'View Players'
+          a#teamButton.btn.btn-light(href=`/${team.tricode}-${team.teamId}`)= 'View Players'
             |  »
