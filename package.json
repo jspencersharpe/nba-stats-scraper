@@ -9,7 +9,7 @@
     "es6-promise": "4.2.8",
     "express": "4.17.1",
     "isomorphic-fetch": "2.2.1",
-    "pug": "3.0.0 ",
+    "pug": "3.0.1",
     "request": "2.88.2"
   },
   "scripts": {
